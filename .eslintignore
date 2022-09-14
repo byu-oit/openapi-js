@@ -1,0 +1,5 @@
+cjs/
+es/
+types/
+docs/
+/jest.config.*

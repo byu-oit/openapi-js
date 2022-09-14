@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "incremental": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@byu-oit-sdk/*": [
+        "packages/*/src"
+      ],
+      "@byu-oit-sdk/client-*": [
+        "clients/client-*/"
+      ]
+    },
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "target": "es5"
+  },
+  "include": [
+    "packages/"
+  ],
+  "exclude": [
+    "node_modules/",
+    "**/*.spec.ts"
+  ]
+}

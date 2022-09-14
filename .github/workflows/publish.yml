@@ -1,0 +1,78 @@
+name: Publish
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Allow one concurrent deployment
+concurrency:
+  group: "publish"
+  cancel-in-progress: false
+
+env:
+  node_version: "18.x"
+
+jobs:
+  env:
+    name: Set Env Vars
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Env Vars
+        run: |
+          matrix='{
+            "registry":[
+              {
+                "token":"NPM_TOKEN",
+                "url":"https://registry.npmjs.org"
+              },
+              {
+                "token":"GITHUB_TOKEN",
+                "url":"https://npm.pkg.github.com"
+              }
+            ]
+          }'
+          echo matrix=`echo $matrix | jq -c .` >> $GITHUB_ENV
+    outputs:
+      matrix: ${{ env.matrix }}
+
+  publish:
+    needs: [env]
+    name: Publish node package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.env.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Restore Lerna
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node_version }}
+          registry-url: ${{ matrix.registry.url }}
+          scope: '@byu-oit'
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          lerna bootstrap --hoist
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets[matrix.registry.token] }}
+
+      - name: Build distribution packages
+        run: lerna run build
+
+      - name: Publish
+        run: lerna publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets[matrix.registry.token] }}

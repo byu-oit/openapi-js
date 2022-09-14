@@ -1,0 +1,33 @@
+{
+  "name": "@byu-oit/openapi-js",
+  "version": "0.0.0",
+  "private": true,
+  "description": "BYU OIT OpenAPI tools",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byu-oit/byu-oit-sdk-js.git"
+  },
+  "scripts": {
+    "build:docs": "typedoc .",
+    "build:packages": "lerna run build",
+    "clean": "lerna run clean",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "test": "lerna run test",
+    "test:coverage": "lerna run test:coverage"
+  },
+  "author": "Spencer Tuft <stuft2@byu.edu>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/byu-oit/byu-oit-sdk-js/issues"
+  },
+  "homepage": "https://github.com/byu-oit/byu-oit-sdk-js#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^5.4.3",
+    "nx": "^14.5.10",
+    "typedoc": "^0.23.14"
+  }
+}

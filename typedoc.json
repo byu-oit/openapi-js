@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+
+  "name": "BYU OIT Javascript SDK",
+  "readme": "README.md",
+  "theme": "default",
+
+  "out": "docs",
+  "entryPointStrategy": "packages",
+  "exclude": ["**/node_modules/**", "**/*.spec.ts"],
+  "excludeExternals": true,
+  "hideGenerator": true
+}

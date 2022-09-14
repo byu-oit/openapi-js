@@ -1,0 +1,16 @@
+# Build & Dependencies
+node_modules/
+cjs/
+es/
+types/
+*.tsbuildinfo
+
+# Testing
+coverage/
+
+# IDE and Environment
+.idea/
+.DS_Store
+
+# Documentation
+docs/
