@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import {
   OAuthFlowsObjectReferences,
   OAuthFlowsObjectSchema
@@ -70,7 +70,7 @@ export const SecuritySchemeObjectSchema = Type.Object({
 
 export type SecuritySchemeObjectType = Static<typeof SecuritySchemeObjectSchema>
 
-export const SecuritySchemeObjectReferences = Array.from(new Set([
+export const SecuritySchemeObjectReferences: TSchema[] = Array.from(new Set([
   SecuritySchemeTypeSchema,
   OAuthFlowsObjectSchema, ...OAuthFlowsObjectReferences
 ]))

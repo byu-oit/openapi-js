@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import {
   ReferenceObjectReferences,
   ReferenceObjectSchema
@@ -41,7 +41,7 @@ export const CallbackObjectSchema = Type.Record(Type.String(), Type.Union([
 
 export type CallbackObjectType = Static<typeof CallbackObjectSchema>
 
-export const CallbackObjectReferences = Array.from(new Set([
+export const CallbackObjectReferences: TSchema[] = Array.from(new Set([
   ReferenceObjectSchema, ...ReferenceObjectReferences,
   PathItemObjectSchema, ...PathItemObjectReferences
 ]))

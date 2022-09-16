@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { SchemaObjectReferences, SchemaObjectSchema } from '@byu-oit/openapi.schema'
 import {
   ReferenceObjectReferences,
@@ -37,7 +37,7 @@ export const HeaderObjectSchema = Type.Object({
 
 export type HeaderObjectType = Static<typeof HeaderObjectSchema>
 
-export const HeaderObjectReferences = Array.from(new Set([
+export const HeaderObjectReferences: TSchema[] = Array.from(new Set([
   SchemaObjectSchema, ...SchemaObjectReferences,
   ReferenceObjectSchema, ...ReferenceObjectReferences,
   ExampleObjectSchema, ...ExampleObjectReferences,

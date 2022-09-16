@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import {
   ExternalDocumentationObjectReferences,
   ExternalDocumentationObjectSchema
@@ -25,7 +25,7 @@ export const TagObjectSchema = Type.Object({
 
 export type TagObjectType = Static<typeof TagObjectSchema>
 
-export const TagObjectReferences = Array.from(new Set([
+export const TagObjectReferences: TSchema[] = Array.from(new Set([
   ExternalDocumentationObjectSchema, ...ExternalDocumentationObjectReferences
 ]))
 

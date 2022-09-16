@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { MediaTypeObjectSchema, MediaTypeObjectReferences } from '@byu-oit/openapi.mediatype'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
@@ -58,7 +58,7 @@ export const RequestBodyObjectSchema = Type.Object({
 
 export type RequestBodyObjectType = Static<typeof RequestBodyObjectSchema>
 
-export const RequestBodyObjectReferences = Array.from(new Set([
+export const RequestBodyObjectReferences: TSchema[] = Array.from(new Set([
   MediaTypeObjectSchema, ...MediaTypeObjectReferences
 ]))
 

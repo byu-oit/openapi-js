@@ -16,7 +16,6 @@ describe('Response Class', () => {
   ]
   test.concurrent.each(methods)('%s does not mutate or mal-format the instance', (method, args, prop) => {
     expect(ins).toHaveProperty(method)
-    // @ts-ignore
     const updated = ins[method](...args)
 
     // most props to check are either the singular or plural form of the function name without the beginning '$'

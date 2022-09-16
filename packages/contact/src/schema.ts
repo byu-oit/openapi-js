@@ -1,4 +1,4 @@
-import { Static, Type } from '@sinclair/typebox'
+import { Static, TSchema, Type } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 export const ContactObjectSchema = Type.Object({
@@ -19,6 +19,6 @@ export const ContactObjectSchema = Type.Object({
 
 export type ContactObjectType = Static<typeof ContactObjectSchema>
 
-export const ContactObjectReferences = []
+export const ContactObjectReferences: TSchema[] = []
 
 export const isContactObject = TypeCompiler.Compile(ContactObjectSchema, ContactObjectReferences)

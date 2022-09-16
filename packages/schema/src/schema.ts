@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 // TODO - Consider implementing the JSON Schema specification
@@ -55,6 +55,6 @@ export const SchemaObjectSchema = Type.Any({
 
 export type SchemaObjectType = Static<typeof SchemaObjectSchema>
 
-export const SchemaObjectReferences = []
+export const SchemaObjectReferences: TSchema[] = []
 
 export const isSchemaObject = TypeCompiler.Compile(SchemaObjectSchema, SchemaObjectReferences)

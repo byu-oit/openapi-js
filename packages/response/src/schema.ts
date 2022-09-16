@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import {
   ReferenceObjectReferences,
   ReferenceObjectSchema
@@ -79,7 +79,7 @@ export const ResponseObjectSchema = Type.Object({
 
 export type ResponseObjectType = Static<typeof ResponseObjectSchema>
 
-export const ResponseObjectReferences = Array.from(new Set([
+export const ResponseObjectReferences: TSchema[] = Array.from(new Set([
   ReferenceObjectSchema, ...ReferenceObjectReferences,
   HeaderObjectSchema, ...HeaderObjectReferences,
   MediaTypeObjectSchema, ...MediaTypeObjectReferences,

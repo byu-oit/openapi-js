@@ -2,7 +2,7 @@ import {
   ServerVariableObjectReferences,
   ServerVariableObjectSchema
 } from '@byu-oit/openapi.servervariable'
-import { Static, Type } from '@sinclair/typebox'
+import { Static, TSchema, Type } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 export const ServerObjectSchema = Type.Object({
@@ -21,7 +21,7 @@ export const ServerObjectSchema = Type.Object({
 
 export type ServerObjectType = Static<typeof ServerObjectSchema>
 
-export const ServerObjectReferences = Array.from(new Set([
+export const ServerObjectReferences: TSchema[] = Array.from(new Set([
   ServerVariableObjectSchema, ...ServerVariableObjectReferences
 ]))
 

@@ -1,4 +1,4 @@
-import { Static, Type } from '@sinclair/typebox'
+import { Static, TSchema, Type } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 export const ServerVariableObjectSchema = Type.Object({
@@ -19,6 +19,6 @@ export const ServerVariableObjectSchema = Type.Object({
 
 export type ServerVariableObjectType = Static<typeof ServerVariableObjectSchema>
 
-export const ServerVariableObjectReferences = []
+export const ServerVariableObjectReferences: TSchema[] = []
 
 export const isServerVariableObject = TypeCompiler.Compile(ServerVariableObjectSchema, ServerVariableObjectReferences)

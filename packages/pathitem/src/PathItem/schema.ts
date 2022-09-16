@@ -20,7 +20,7 @@ import {
   RequestBodyObjectReferences,
   RequestBodyObjectSchema
 } from '@byu-oit/openapi.requestbody'
-import { Static, TSelf, Type } from '@sinclair/typebox'
+import { Static, TSchema, TSelf, Type } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 export const MethodObjectSchema = Type.Union([
@@ -154,7 +154,7 @@ export const PathItemObjectSchema = Type.Recursive(Self => Type.Object({
 
 export type PathItemObjectType = Static<typeof PathItemObjectSchema>
 
-export const PathItemObjectReferences = Array.from(
+export const PathItemObjectReferences: TSchema[] = Array.from(
   new Set([
     ReferenceObjectSchema, ...ReferenceObjectReferences,
     ServerObjectSchema, ...ServerObjectReferences,

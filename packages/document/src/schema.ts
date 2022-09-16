@@ -1,4 +1,4 @@
-import { Static, Type } from '@sinclair/typebox'
+import { Static, TSchema, Type } from '@sinclair/typebox'
 import { semver } from '@byu-oit/openapi.common'
 import { InfoObjectReferences, InfoObjectSchema } from '@byu-oit/openapi.info'
 import { ServerObjectSchema, ServerObjectReferences } from '@byu-oit/openapi.server'
@@ -62,7 +62,7 @@ export const DocumentObjectSchema = Type.Object({
 
 export type DocumentObjectType = Static<typeof DocumentObjectSchema>
 
-export const DocumentObjectReferences = Array.from(new Set([
+export const DocumentObjectReferences: TSchema[] = Array.from(new Set([
   InfoObjectSchema, ...InfoObjectReferences,
   ServerObjectSchema, ...ServerObjectReferences,
   PathItemObjectSchema, ...PathItemObjectReferences,

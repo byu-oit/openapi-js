@@ -4,7 +4,7 @@ import {
   ReferenceObjectSchema
 } from '@byu-oit/openapi.reference'
 import { ExampleObjectReferences, ExampleObjectSchema } from '@byu-oit/openapi.example'
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 export const ParameterLocationSchema = Type.Union([
@@ -93,7 +93,7 @@ export const ParameterObjectSchema = Type.Object({
 
 export type ParameterObjectType = Static<typeof ParameterObjectSchema>
 
-export const ParameterObjectReferences = Array.from(new Set([
+export const ParameterObjectReferences: TSchema[] = Array.from(new Set([
   ExampleObjectSchema, ...ExampleObjectReferences,
   ReferenceObjectSchema, ...ReferenceObjectReferences,
   SchemaObjectSchema, ...SchemaObjectReferences,

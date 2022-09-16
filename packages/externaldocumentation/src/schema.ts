@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 export const ExternalDocumentationObjectSchema = Type.Object({
@@ -19,6 +19,6 @@ export const ExternalDocumentationObjectSchema = Type.Object({
 
 export type ExternalDocumentationObjectType = Static<typeof ExternalDocumentationObjectSchema>
 
-export const ExternalDocumentationObjectReferences = []
+export const ExternalDocumentationObjectReferences: TSchema[] = []
 
 export const isExternalDocumentationObject = TypeCompiler.Compile(ExternalDocumentationObjectSchema, ExternalDocumentationObjectReferences)

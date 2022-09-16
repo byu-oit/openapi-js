@@ -1,4 +1,4 @@
-import { Static, Type } from '@sinclair/typebox'
+import { Static, TSchema, Type } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 export const LicenseObjectSchema = Type.Object({
@@ -20,6 +20,6 @@ export const LicenseObjectSchema = Type.Object({
 
 export type LicenseObjectType = Static<typeof LicenseObjectSchema>
 
-export const LicenseObjectReferences = []
+export const LicenseObjectReferences: TSchema[] = []
 
 export const isLicenseObject = TypeCompiler.Compile(LicenseObjectSchema, LicenseObjectReferences)

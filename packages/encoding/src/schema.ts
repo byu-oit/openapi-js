@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { ReferenceObjectSchema, ReferenceObjectReferences } from '@byu-oit/openapi.reference'
 import { HeaderObjectSchema, HeaderObjectReferences } from '@byu-oit/openapi.header'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
@@ -34,7 +34,7 @@ export const EncodingObjectSchema = Type.Object({
 
 export type EncodingObjectType = Static<typeof EncodingObjectSchema>
 
-export const EncodingObjectReferences = Array.from(new Set([
+export const EncodingObjectReferences: TSchema[] = Array.from(new Set([
   ReferenceObjectSchema, ...ReferenceObjectReferences,
   HeaderObjectSchema, ...HeaderObjectReferences
 ]))

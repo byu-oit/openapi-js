@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
 // TODO - Make OauthFlows for each kind: authorizationCode, clientCredentials
@@ -30,6 +30,6 @@ export const OAuthFlowObjectSchema = Type.Object({
 
 export type OAuthFlowObjectType = Static<typeof OAuthFlowObjectSchema>
 
-export const OAuthFlowObjectReferences = []
+export const OAuthFlowObjectReferences: TSchema[] = []
 
 export const isOAuthFlowObject = TypeCompiler.Compile(OAuthFlowObjectSchema, OAuthFlowObjectReferences)

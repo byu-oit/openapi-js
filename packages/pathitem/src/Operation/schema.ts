@@ -1,4 +1,4 @@
-import { Type, Static, TSelf } from '@sinclair/typebox'
+import { Type, Static, TSelf, TSchema } from '@sinclair/typebox'
 import {
   ExternalDocumentationObjectReferences,
   ExternalDocumentationObjectSchema
@@ -158,7 +158,7 @@ export const OperationObjectSchema = Type.Recursive((Self: TSelf) => {
 
 export type OperationObjectType = Static<typeof OperationObjectSchema>
 
-export const OperationObjectReferences = Array.from(new Set([
+export const OperationObjectReferences: TSchema[] = Array.from(new Set([
   ExternalDocumentationObjectSchema, ...ExternalDocumentationObjectReferences,
   ReferenceObjectSchema, ...ReferenceObjectReferences,
   ParameterObjectSchema, ...ParameterObjectReferences,

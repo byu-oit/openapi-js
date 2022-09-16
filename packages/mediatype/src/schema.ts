@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { SchemaObjectSchema } from '@byu-oit/openapi.schema'
 import {
   ReferenceObjectReferences,
@@ -58,7 +58,7 @@ export const MediaTypeObjectSchema = Type.Object({
 
 export type MediaTypeObjectType = Static<typeof MediaTypeObjectSchema>
 
-export const MediaTypeObjectReferences = Array.from(new Set([
+export const MediaTypeObjectReferences: TSchema[] = Array.from(new Set([
   ExampleObjectSchema, ...ExampleObjectReferences,
   EncodingObjectSchema, ...EncodingObjectReferences,
   ReferenceObjectSchema, ...ReferenceObjectReferences

@@ -1,5 +1,5 @@
 import { semver } from '@byu-oit/openapi.common'
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { ContactObjectReferences, ContactObjectSchema } from '@byu-oit/openapi.contact'
 import { LicenseObjectReferences, LicenseObjectSchema } from '@byu-oit/openapi.license'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
@@ -40,7 +40,7 @@ export const InfoObjectSchema = Type.Object({
 
 export type InfoObjectType = Static<typeof InfoObjectSchema>
 
-export const InfoObjectReferences = [
+export const InfoObjectReferences: TSchema[] = [
   ContactObjectSchema, ...ContactObjectReferences,
   LicenseObjectSchema, ...LicenseObjectReferences
 ]

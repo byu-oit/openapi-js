@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Type, Static, TSchema } from '@sinclair/typebox'
 import { ServerObjectSchema, ServerObjectReferences } from '@byu-oit/openapi.server'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 
@@ -30,7 +30,7 @@ export const LinkObjectSchema = Type.Object({
 
 export type LinkObjectType = Static<typeof LinkObjectSchema>
 
-export const LinkObjectReferences = Array.from(new Set([
+export const LinkObjectReferences: TSchema[] = Array.from(new Set([
   ServerObjectSchema, ...ServerObjectReferences
 ]))
 
