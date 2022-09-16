@@ -12,11 +12,8 @@
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@byu-oit-sdk/*": [
+      "@byu-oit/openapi.*": [
         "packages/*/src"
-      ],
-      "@byu-oit-sdk/client-*": [
-        "clients/client-*/"
       ]
     },
     "preserveConstEnums": true,

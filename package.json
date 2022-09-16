@@ -8,9 +8,12 @@
     "url": "git+https://github.com/byu-oit/byu-oit-sdk-js.git"
   },
   "scripts": {
+    "build": "lerna run build",
+    "build:cjs": "lerna run build:cjs",
     "build:docs": "typedoc .",
-    "build:packages": "lerna run build",
-    "clean": "lerna run clean",
+    "build:types": "lerna run build:types",
+    "build:es": "lerna run build:es",
+    "clean": "lerna run clean --parallel",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "test": "lerna run test",
