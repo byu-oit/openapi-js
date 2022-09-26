@@ -41,7 +41,7 @@ jobs:
 
   publish:
     needs: [env]
-    name: Publish node package
+    name: Publish node packages
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.env.outputs.matrix) }}
@@ -62,15 +62,12 @@ jobs:
           registry-url: ${{ matrix.registry.url }}
           scope: '@byu-oit'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets[matrix.registry.token] }}
 
-      - name: Build distribution packages
-        run: lerna run build
-
-      - name: Test
+      - name: Test & build distribution packages
         run: lerna run test
 
       - name: Publish
