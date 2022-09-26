@@ -1,9 +1,13 @@
+/* eslint-disable
+ @typescript-eslint/no-unsafe-assignment,
+ @typescript-eslint/no-unsafe-call,
+ @typescript-eslint/no-unsafe-member-access
+*/
 import { Value } from '@sinclair/typebox/value'
 import { Type } from '@sinclair/typebox'
 import { PathItem, PathItemObjectSchema } from '../PathItem'
 import { ServerObjectSchema } from '@byu-oit/openapi.server'
 import { ParameterObjectSchema } from '@byu-oit/openapi.parameter'
-import { SchemaObjectSchema } from '@byu-oit/openapi.schema'
 import { OperationObjectSchema } from '../Operation'
 
 describe('PathItem Class', () => {
@@ -14,10 +18,10 @@ describe('PathItem Class', () => {
     [PathItem.prototype.$description.name, [Value.Create(Type.String())]],
     [PathItem.prototype.$server.name, [Value.Create(ServerObjectSchema)]],
     [PathItem.prototype.$parameter.name, [Value.Create(ParameterObjectSchema)], 'parameters'],
-    [PathItem.prototype.$query.name, [Value.Create(Type.String()), Value.Create(SchemaObjectSchema)], 'parameters'],
-    [PathItem.prototype.$header.name, [Value.Create(Type.String()), Value.Create(SchemaObjectSchema)], 'parameters'],
-    [PathItem.prototype.$path.name, [Value.Create(Type.String()), Value.Create(SchemaObjectSchema)], 'parameters'],
-    [PathItem.prototype.$cookie.name, [Value.Create(Type.String()), Value.Create(SchemaObjectSchema)], 'parameters'],
+    [PathItem.prototype.$query.name, [Value.Create(ParameterObjectSchema)], 'parameters'],
+    [PathItem.prototype.$header.name, [Value.Create(ParameterObjectSchema)], 'parameters'],
+    [PathItem.prototype.$path.name, [Value.Create(ParameterObjectSchema)], 'parameters'],
+    [PathItem.prototype.$cookie.name, [Value.Create(ParameterObjectSchema)], 'parameters'],
     [PathItem.prototype.$get.name, [Value.Create(OperationObjectSchema)]],
     [PathItem.prototype.$put.name, [Value.Create(OperationObjectSchema)]],
     [PathItem.prototype.$post.name, [Value.Create(OperationObjectSchema)]],

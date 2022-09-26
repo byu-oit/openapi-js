@@ -1,11 +1,15 @@
-import { Base, TypeCheckError } from '@byu-oit/openapi.common'
-import { Example } from '@byu-oit/openapi.example'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
+import { Example, ExampleObjectType, ExampleRecord } from '@byu-oit/openapi.example'
 import { ParameterStyleType } from '@byu-oit/openapi.parameter'
 import { SecuritySchemeObjectType } from '@byu-oit/openapi.securityscheme'
 import { HeaderObjectType, isHeaderObject } from './schema'
+import {
+  isReferenceObject,
+  Reference,
+} from '@byu-oit/openapi.reference'
 
-export class Header<T extends HeaderObjectType> extends Base implements HeaderObjectType {
-  description?: string
+export class Header<T extends HeaderObjectType> extends BaseObject<T> {
+  description?: T['description']
   required?: T['required']
   deprecated?: T['deprecated']
   allowEmptyValue?: T['allowEmptyValue']
@@ -14,22 +18,68 @@ export class Header<T extends HeaderObjectType> extends Base implements HeaderOb
   allowReserved?: T['allowReserved']
   schema?: T['schema']
   example?: T['example']
-  examples?: T['examples']
+  examples?: ExampleRecord<T['examples']>
 
-  constructor (data?: HeaderObjectType) {
+  constructor (data?: T) {
     super()
-    Object.assign(this, data)
+
+    if (data == null) {
+      return
+    }
+
+    if (data.description != null) {
+      this.description = data.description
+    }
+
+    if (data.required != null) {
+      this.required = data.required
+    }
+
+    if (data.deprecated != null) {
+      this.deprecated = data.deprecated
+    }
+
+    if (data.allowEmptyValue != null) {
+      this.allowEmptyValue = data.allowEmptyValue
+    }
+
+    if (data.style != null) {
+      this.style = data.style
+    }
+
+    if (data.explode != null) {
+      this.explode = data.explode
+    }
+
+    if (data.allowReserved != null) {
+      this.allowReserved = data.allowReserved
+    }
+
+    if (data.schema != null) {
+      this.schema = data.schema
+    }
+
+    if (data.example != null) {
+      this.example = data.example
+    }
+
+    if (data.examples != null) {
+      this.examples = Object.entries(data.examples).reduce((agg, [basename, data]) => {
+        const example = isReferenceObject.Check(data) ? new Reference(data) : new Example(data)
+        return { ...agg, [basename]: example }
+      }, {} as ExampleRecord<T['examples']>)
+    }
   }
 
-  static from<T extends HeaderObjectType = HeaderObjectType> (data: unknown): Header<T> {
+  static from<T extends HeaderObjectType> (data: unknown): Header<T> {
     const valid = Header.validator.Check(data)
     if (!valid) throw new TypeCheckError(Header.validator, data)
-    return new Header(data) 
+    return new Header(data) as Header<T>
   }
 
   static validator = isHeaderObject
 
-  $description (description: string): Header<T> {
+  $description<U extends string>(description: U): Header<T> {
     return new Header({ ...this.json(), description })
   }
 
@@ -61,8 +111,9 @@ export class Header<T extends HeaderObjectType> extends Base implements HeaderOb
     return new Header({ ...this.json(), schema })
   }
 
-  $example (name: string, ...args: ConstructorParameters<typeof Example>): Header<T> {
-    const examples = { ...this.examples, [name]: new Example(...args) }
-    return new Header({ ...this.json(), examples })
+  $example<U extends string, V extends ExampleObjectType> (name: U, data?: V): Header<T & { examples: T['examples'] & { [P in U]: V } }> {
+    const json = this.json()
+    const examples = { ...(json.examples ?? []), [name]: data } as T['examples'] & { [P in U]: V }
+    return new Header({ ...json, examples })
   }
 }

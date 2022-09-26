@@ -22,9 +22,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-        "@byu-oit/openapi.common": "*",
-   "@sinclair/typebox": "^0.24.41",
-    "lodash.pickby": "^4.6.0",
+    "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },
   "devDependencies": {

@@ -9,10 +9,7 @@
   },
   "scripts": {
     "build": "lerna run build",
-    "build:cjs": "lerna run build:cjs",
     "build:docs": "typedoc .",
-    "build:types": "lerna run build:types",
-    "build:es": "lerna run build:es",
     "clean": "lerna run clean --parallel",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",

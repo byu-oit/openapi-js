@@ -1,20 +1,31 @@
-import { Base, Merge, TypeCheckError } from '@byu-oit/openapi.common'
-import { ServerVariable, ServerVariableObjectType } from '@byu-oit/openapi.servervariable'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
+import {
+  ServerVariable,
+  ServerVariableObjectType,
+  ServerVariableRecord
+} from '@byu-oit/openapi.servervariable'
 import { isServerObject, ServerObjectType } from './schema'
 
-export class Server<T extends ServerObjectType> extends Base implements ServerObjectType {
-  url!: T['url']
+export class Server<T extends ServerObjectType> extends BaseObject<T> {
+  url: T['url']
   description?: T['description']
-  variables?: T['variables']
+  variables?: ServerVariableRecord<T['variables']>
 
-  constructor (data: T)
-  constructor (url: T['url'], data?: Omit<T, 'url'>)
-  constructor (url: T['url'] | T, data?: Omit<T, 'url'>) {
+  constructor (data: T) {
     super()
-    const server: ServerObjectType = typeof url === 'string'
-      ? { ...data, url }
-      : url
-    Object.assign(this, server)
+
+    this.url = data.url
+
+    if (data.description != null) {
+      this.description = data.description
+    }
+
+    if (data.variables != null) {
+      this.variables = Object.entries(data.variables).reduce((agg, [basename, data]) => {
+        const serverVariable = new ServerVariable(data)
+        return { ...agg, [basename]: serverVariable }
+      }, {} as ServerVariableRecord<T['variables']>)
+    }
   }
 
   static from<T extends ServerObjectType = ServerObjectType> (data: unknown): Server<T> {
@@ -29,18 +40,13 @@ export class Server<T extends ServerObjectType> extends Base implements ServerOb
     return new Server({ ...this.json(), url })
   }
 
-  $description (description: string): Server<T> {
+  $description<U extends string>(description: U): Server<T & { description: U }> {
     return new Server({ ...this.json(), description })
   }
 
-  $variable<U extends string, V extends ServerVariableObjectType> (name: U, data: V): Server<T & { variables: Merge<T['variables'], { [P in U]: ServerVariable<V> }> }> {
-    const server = {
-      ...this.json(),
-      variables: {
-        ...this.variables,
-        [name]: new ServerVariable(data)
-      }
-    }
-    return new Server(server)
+  $variable<U extends string, V extends ServerVariableObjectType> (name: U, data: V): Server<T & { variables: T['variables'] & { [P in U]: V } }> {
+    const json = this.json()
+    const variables = { ...(json.variables ?? []), [name]: data } as T['variables'] & { [P in U]: V }
+    return new Server({ ...json, variables })
   }
 }

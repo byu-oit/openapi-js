@@ -1,29 +1,43 @@
-import { Base, TypeCheckError } from '@byu-oit/openapi.common'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
 import { Contact, ContactObjectType } from '@byu-oit/openapi.contact'
 import { License, LicenseObjectType } from '@byu-oit/openapi.license'
 import { InfoObjectType, isInfoObject } from './schema'
 
-export class Info<T extends InfoObjectType> extends Base implements InfoObjectType {
-  title!: T['title']
+export class Info<T extends InfoObjectType> extends BaseObject<T> {
+  title: T['title']
   summary?: T['summary']
   description?: T['description']
   termsOfService?: T['termsOfService']
-  contact?: T['contact']
-  license?: T['license']
-  version!: T['version']
+  contact?: Contact<NonNullable<T['contact']>>
+  license?: License<NonNullable<T['license']>>
+  version: T['version']
 
-  constructor (data: T)
-  constructor (title: T['title'], version: T['version'], data?: Omit<T, 'title' | 'version'>)
-  constructor (value: T['title'] | T, version?: T['version'], data?: Omit<T, 'title' | 'version'>) {
+  constructor (data: T) {
     super()
-    const info = typeof value === 'string'
-      ? {
-          ...data,
-          title: value,
-          version
-        }
-      : value
-    Object.assign(this, info)
+
+    this.title = data.title
+
+    if (data.summary != null) {
+      this.summary = data.summary
+    }
+
+    if (data.description != null) {
+      this.description = data.description
+    }
+
+    if (data.termsOfService != null) {
+      this.termsOfService = data.termsOfService
+    }
+
+    if (data.contact != null) {
+      this.contact = new Contact(data.contact)
+    }
+
+    if (data.license != null) {
+      this.license = new License(data.license)
+    }
+
+    this.version = data.version
   }
 
   static from<T extends InfoObjectType = InfoObjectType> (data: unknown): Info<T> {
@@ -51,11 +65,11 @@ export class Info<T extends InfoObjectType> extends Base implements InfoObjectTy
   }
 
   $contact<U extends ContactObjectType> (data: U): Info<T & { contact: U }> {
-    return new Info({ ...this.json(), contact: new Contact(data) })
+    return new Info({ ...this.json(), contact: data })
   }
 
   $license<U extends LicenseObjectType> (data: U): Info<T & { license: U }> {
-    return new Info({ ...this.json(), license: new License(data) })
+    return new Info({ ...this.json(), license: data })
   }
 
   $version<U extends string> (version: U): Info<T & { version: U }> {

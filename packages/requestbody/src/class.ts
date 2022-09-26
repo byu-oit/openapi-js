@@ -1,15 +1,30 @@
-import { Base, Merge, TypeCheckError } from '@byu-oit/openapi.common'
-import { MediaType, MediaTypeObjectType } from '@byu-oit/openapi.mediatype'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
+import {
+  MediaType,
+  MediaTypeObjectType,
+  MediaTypeRecord
+} from '@byu-oit/openapi.mediatype'
 import { isRequestBodyObject, RequestBodyObjectType } from './schema'
 
-export class RequestBody<T extends RequestBodyObjectType> extends Base implements RequestBodyObjectType {
-  description?: string
-  content!: T['content']
+export class RequestBody<T extends RequestBodyObjectType> extends BaseObject<T> {
+  description?: T['description']
+  content: MediaTypeRecord<T['content']>
   required?: T['required']
 
   constructor (data: T) {
     super()
-    Object.assign(this, data)
+
+    this.content = Object.entries(data.content).reduce((agg, [basename, data]) => {
+      return { ...agg, [basename]: new MediaType(data) }
+    }, {} as MediaTypeRecord<T['content']>)
+
+    if (data.description != null) {
+      this.description = data.description
+    }
+
+    if (data.required != null) {
+      this.required = data.required
+    }
   }
 
   static from<T extends RequestBodyObjectType = RequestBodyObjectType> (data: unknown): RequestBody<T> {
@@ -20,21 +35,17 @@ export class RequestBody<T extends RequestBodyObjectType> extends Base implement
 
   static validator = isRequestBodyObject
 
-  $description (description: string): RequestBody<T> {
+  $description<U extends string>(description: U): RequestBody<T & { description: U }> {
     return new RequestBody({ ...this.json(), description })
   }
 
-  $content<U extends string, V extends MediaTypeObjectType>(mimeType: U, data: V): RequestBody<T & { content: Merge<T['content'], { [P in U]: MediaType<V> }> }> {
-    return new RequestBody({
-      ...this.json(),
-      content: {
-        ...this.content,
-        [mimeType]: new MediaType(data)
-      }
-    })
+  $content<U extends string, V extends MediaTypeObjectType>(mimeType: U, data: V): RequestBody<T & { content: T['content'] & { [P in U]: V } }> {
+    const json = this.json()
+    const content = { ...(json.content ?? []), [mimeType]: data } as T['content'] & { [P in U]: V }
+    return new RequestBody({ ...json, content })
   }
 
-  $json<U extends MediaTypeObjectType> (data: U): RequestBody<T & { content: Merge<T['content'], { ['application/json']: MediaType<U> }> }> {
+  $json<U extends MediaTypeObjectType> (data: U): RequestBody<T & { content: T['content'] & { ['application/json']: U } }> {
     return this.$content<'application/json', U>('application/json', data)
   }
 

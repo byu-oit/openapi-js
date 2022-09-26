@@ -1,31 +1,37 @@
 import { Type, Static, TSchema } from '@sinclair/typebox'
-import { ServerObjectSchema, ServerObjectReferences } from '@byu-oit/openapi.server'
+import {
+  ServerObjectSchema,
+  ServerObjectReferences,
+  ServerObjectExamples
+} from '@byu-oit/openapi.server'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
+
+export const LinkObjectExamples: [unknown, ...unknown[]] = [
+  {},
+  {
+    operationId: 'getUserAddress',
+    parameters: {
+      userId: '$request.path.id'
+    }
+  },
+  {
+    operationRef: '#/paths/~12.0~1repositories~1{username}/get',
+    parameters: {
+      username: '$response.body#/username'
+    }
+  }
+]
 
 export const LinkObjectSchema = Type.Object({
   operationRef: Type.Optional(Type.String()),
   operationId: Type.Optional(Type.String()),
-  parameters: Type.Optional(Type.Record(Type.String(), Type.Any())),
-  requestBody: Type.Optional(Type.Any()),
+  parameters: Type.Optional(Type.Record(Type.String(), Type.Unknown())),
+  requestBody: Type.Optional(Type.Unknown()),
   description: Type.Optional(Type.String()),
-  server: Type.Optional(Type.Ref(ServerObjectSchema, { default: ServerObjectSchema.examples[0] }))
+  server: Type.Optional(Type.Ref(ServerObjectSchema, { default: ServerObjectExamples[0] }))
 }, {
   $id: 'Link',
-  examples: [
-    {},
-    {
-      operationId: 'getUserAddress',
-      parameters: {
-        userId: '$request.path.id'
-      }
-    },
-    {
-      operationRef: '#/paths/~12.0~1repositories~1{username}/get',
-      parameters: {
-        username: '$response.body#/username'
-      }
-    }
-  ]
+  examples: LinkObjectExamples
 })
 
 export type LinkObjectType = Static<typeof LinkObjectSchema>

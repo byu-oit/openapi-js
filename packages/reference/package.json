@@ -24,11 +24,13 @@
   "dependencies": {
     "@byu-oit/openapi.common": "*",
     "@sinclair/typebox": "^0.24.41",
+    "lodash.get": "^4.4.2",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/jest": "^28.1.8",
+    "@types/lodash.get": "^4.4.7",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "concurrently": "^7.3.0",
     "eslint": "^8.0.1",

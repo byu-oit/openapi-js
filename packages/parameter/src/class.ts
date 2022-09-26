@@ -1,16 +1,16 @@
-import { Base, TypeCheckError } from '@byu-oit/openapi.common'
-import { Example } from '@byu-oit/openapi.example'
-import { Type } from '@sinclair/typebox'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
+import { Example, ExampleObjectType, ExampleRecord } from '@byu-oit/openapi.example'
 import {
   ParameterObjectType,
   ParameterLocationType,
   ParameterStyleType,
   isParameterObject
 } from './schema'
+import { isReferenceObject, Reference } from '@byu-oit/openapi.reference'
 
-export class Parameter<T extends ParameterObjectType> extends Base implements ParameterObjectType {
-  name!: T['name']
-  in!: T['in']
+export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
+  name: T['name']
+  in: T['in']
   description?: T['description']
   required?: T['required']
   deprecated?: T['deprecated']
@@ -18,23 +18,59 @@ export class Parameter<T extends ParameterObjectType> extends Base implements Pa
   style?: T['style']
   explode?: T['explode']
   allowReserved?: T['allowReserved']
-  schema?: T['name']
+  schema?: T['schema']
   example?: T['example']
-  examples?: T['examples']
+  examples?: ExampleRecord<T['examples']>
 
-  constructor (data: T)
-  constructor (name: T['name'], location: T['in'], data?: T)
-  constructor (value: string | T, location?: T['in'], data?: T) {
+  constructor (data: T) {
     super()
-    const parameter = typeof value === 'string'
-      ? {
-        ...data,
-        name: value,
-        in: location,
-        ...data?.schema != null && { schema: Type.Strict(data.schema) }
-      }
-      : value
-    Object.assign(this, parameter)
+
+    this.name = data.name
+
+    this.in = data.in
+
+    if (data.description != null) {
+      this.description = data.description
+    }
+
+    if (data.required != null) {
+      this.required = data.required
+    }
+
+    if (data.deprecated != null) {
+      this.deprecated = data.deprecated
+    }
+
+    if (data.allowEmptyValue != null) {
+      this.allowEmptyValue = data.allowEmptyValue
+    }
+
+    if (data.style != null) {
+      this.style = data.style
+    }
+
+    if (data.explode != null) {
+      this.explode = data.explode
+    }
+
+    if (data.allowReserved != null) {
+      this.allowReserved = data.allowReserved
+    }
+
+    if (data.schema != null) {
+      this.schema = data.schema
+    }
+
+    if (data.example != null) {
+      this.example = data.example
+    }
+
+    if (data.examples != null) {
+      this.examples = Object.entries(data.examples).reduce((agg, [basename, data]) => {
+        const example = isReferenceObject.Check(data) ? new Reference(data) : new Example(data)
+        return { ...agg, [basename]: example }
+      }, {} as ExampleRecord<T['examples']>)
+    }
   }
 
   static from<T extends ParameterObjectType = ParameterObjectType> (data: unknown): Parameter<T> {
@@ -97,8 +133,9 @@ export class Parameter<T extends ParameterObjectType> extends Base implements Pa
     return new Parameter({ ...this.json(), allowReserved })
   }
 
-  $example (name: string, ...args: ConstructorParameters<typeof Example>): Parameter<T> {
-    const examples = { ...this.examples, [name]: new Example(...args) }
-    return new Parameter({ ...this.json(), examples })
+  $example<U extends string, V extends ExampleObjectType>(name: U, data?: V): Parameter<T & { examples: T['examples'] & { [P in U]: V } }> {
+    const json = this.json()
+    const examples = { ...(json.examples ?? []), [name]: data } as T['examples'] & { [P in U]: V }
+    return new Parameter({ ...json, examples })
   }
 }

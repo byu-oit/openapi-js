@@ -1,9 +1,13 @@
+/* eslint-disable
+ @typescript-eslint/no-unsafe-assignment,
+ @typescript-eslint/no-unsafe-call,
+ @typescript-eslint/no-unsafe-member-access
+*/
 import { Value } from '@sinclair/typebox/value'
 import { Type } from '@sinclair/typebox'
 import { SecuritySchemeObjectSchema } from './schema'
 import { SecurityScheme } from './class'
-import { OAuthFlowObjectSchema } from '@byu-oit/openapi.oauthflow'
-import { OAuthGrantTypeSchema } from '@byu-oit/openapi.oauthflows'
+import { OAuthFlowObjectSchema, OAuthGrantTypeSchema } from '@byu-oit/openapi.oauthflow'
 
 describe('SecurityScheme Class', () => {
   const data = Value.Create(SecuritySchemeObjectSchema) // Fake schema instantiation

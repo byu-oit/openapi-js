@@ -1,35 +1,45 @@
 import { Type, Static, TSchema } from '@sinclair/typebox'
-import { ReferenceObjectSchema, ReferenceObjectReferences } from '@byu-oit/openapi.reference'
-import { HeaderObjectSchema, HeaderObjectReferences } from '@byu-oit/openapi.header'
+import {
+  ReferenceObjectSchema,
+  ReferenceObjectReferences,
+  ReferenceObjectExamples
+} from '@byu-oit/openapi.reference'
+import {
+  HeaderObjectSchema,
+  HeaderObjectReferences,
+  HeaderObjectExamples
+} from '@byu-oit/openapi.header'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
+
+export const EncodingObjectExamples: [unknown, ...unknown[]] = [
+  {
+    contentType: 'application/xml; charset=utf-8'
+  },
+  {
+    contentType: 'image/png, image/jpeg',
+    headers: {
+      'X-Rate-Limit-Limit': {
+        description: 'The number of allowed requests in the current period',
+        schema: {
+          type: 'integer'
+        }
+      }
+    }
+  }
+]
 
 export const EncodingObjectSchema = Type.Object({
   contentType: Type.Optional(Type.String()),
   headers: Type.Optional(Type.Record(Type.String(), Type.Union([
-    Type.Ref(ReferenceObjectSchema, { default: ReferenceObjectSchema.examples[0] }),
-    Type.Ref(HeaderObjectSchema, { default: HeaderObjectSchema.examples[0] })
+    Type.Ref(ReferenceObjectSchema, { default: ReferenceObjectExamples[0] }),
+    Type.Ref(HeaderObjectSchema, { default: HeaderObjectExamples[0] })
   ]))),
   style: Type.Optional(Type.String()),
   explode: Type.Optional(Type.Boolean()),
   allowReserved: Type.Optional(Type.Boolean())
 }, {
   $id: 'Encoding',
-  examples: [
-    {
-      contentType: 'application/xml; charset=utf-8'
-    },
-    {
-      contentType: 'image/png, image/jpeg',
-      headers: {
-        'X-Rate-Limit-Limit': {
-          description: 'The number of allowed requests in the current period',
-          schema: {
-            type: 'integer'
-          }
-        }
-      }
-    }
-  ]
+  examples: EncodingObjectExamples
 })
 
 export type EncodingObjectType = Static<typeof EncodingObjectSchema>

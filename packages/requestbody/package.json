@@ -24,6 +24,7 @@
   "dependencies": {
     "@byu-oit/openapi.common": "*",
     "@byu-oit/openapi.mediatype": "*",
+    "@byu-oit/openapi.reference": "*",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },

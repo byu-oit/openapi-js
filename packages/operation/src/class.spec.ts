@@ -1,3 +1,8 @@
+/* eslint-disable
+ @typescript-eslint/no-unsafe-assignment,
+ @typescript-eslint/no-unsafe-call,
+ @typescript-eslint/no-unsafe-member-access
+*/
 import { Value } from '@sinclair/typebox/value'
 import { Type } from '@sinclair/typebox'
 import { OperationObjectSchema } from './schema'
@@ -20,7 +25,7 @@ describe('Operation Class', () => {
     [Operation.prototype.$operationId.name, [Value.Create(Type.String())]],
     [Operation.prototype.$deprecated.name, [!data.deprecated]],
     [Operation.prototype.$parameter.name, [Value.Create(ParameterObjectSchema)], 'parameters'],
-    [Operation.prototype.$body.name, [Value.Create(Type.String()), Value.Create(RequestBodyObjectSchema)], 'requestBody'],
+    [Operation.prototype.$body.name, [Value.Create(RequestBodyObjectSchema)], 'requestBody'],
     [Operation.prototype.$response.name, ['default', Value.Create(ResponseObjectSchema)]],
     [Operation.prototype.$callback.name, [Value.Create(Type.String()), Value.Create(CallbackObjectSchema)]],
     [Operation.prototype.$securityRequirement.name, [Value.Create(Type.String()), Value.Create(Type.Array(Type.String()))], 'security'],

@@ -1,15 +1,28 @@
-import { Base, Merge, TypeCheckError } from '@byu-oit/openapi.common'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
 import { isOAuthFlowObject, OAuthFlowObjectType } from './schema'
 
-export class OAuthFlow<T extends OAuthFlowObjectType> extends Base implements OAuthFlowObjectType {
-  authorizationUrl!: T['authorizationUrl']
-  tokenUrl!: T['tokenUrl']
+export class OAuthFlow<T extends OAuthFlowObjectType> extends BaseObject<T> {
+  authorizationUrl?: T['authorizationUrl']
+  tokenUrl?: T['tokenUrl']
   refreshUrl?: T['refreshUrl']
-  scopes!: T['scopes']
+  scopes: T['scopes']
 
   constructor (data: T) {
     super()
-    Object.assign(this, data)
+
+    if (data.authorizationUrl != null) {
+      this.authorizationUrl = data.authorizationUrl
+    }
+
+    if (data.tokenUrl != null) {
+      this.tokenUrl = data.tokenUrl
+    }
+
+    if (data.refreshUrl != null) {
+      this.refreshUrl = data.refreshUrl
+    }
+
+    this.scopes = data.scopes
   }
 
   static from<T extends OAuthFlowObjectType = OAuthFlowObjectType> (data: unknown): OAuthFlow<T> {
@@ -32,8 +45,9 @@ export class OAuthFlow<T extends OAuthFlowObjectType> extends Base implements OA
     return new OAuthFlow({ ...this.json(), refreshUrl })
   }
 
-  $scope<U extends string> (name: U, description: string): OAuthFlow<T & { scopes: Merge<T['scopes'], { [P in U]: string }> }> {
-    const scopes = { ...this.scopes, [name]: description }
-    return new OAuthFlow({ ...this.json(), scopes })
+  $scope<U extends string, V extends string> (name: U, description: V): OAuthFlow<T & { scopes: T['scopes'] & { [P in U]: V } }> {
+    const json = this.json()
+    const scopes = { ...(json.scopes ?? []), [name]: description } as T['scopes'] & { [P in U]: V }
+    return new OAuthFlow({ ...json, scopes })
   }
 }

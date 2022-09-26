@@ -1,26 +1,91 @@
-import { Base, Push, TypeCheckError } from '@byu-oit/openapi.common'
-import { Server, ServerObjectType } from '@byu-oit/openapi.server'
-import { Parameter, ParameterObjectType } from '@byu-oit/openapi.parameter'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
+import { Server, ServerCollection, ServerObjectType } from '@byu-oit/openapi.server'
+import {
+  isParameterObject,
+  Parameter, ParameterCollection,
+  ParameterObjectType
+} from '@byu-oit/openapi.parameter'
 import { Operation, OperationObjectType } from '../Operation'
 import { PathItemObjectType, MethodObjectType, isPathItemObject } from './schema'
+import { Reference } from '@byu-oit/openapi.reference'
 
-export class PathItem<T extends PathItemObjectType> extends Base implements PathItemObjectType {
+export class PathItem<T extends PathItemObjectType> extends BaseObject<T> {
+  /**
+   * Source: https://spec.openapis.org/oas/latest.html#path-item-object
+   */
   summary?: T['summary']
   description?: T['description']
-  servers?: T['servers']
-  parameters?: T['parameters']
-  get?: T['get']
-  put?: T['put']
-  post?: T['post']
-  delete?: T['delete']
-  options?: T['options']
-  head?: T['head']
-  patch?: T['patch']
-  trace?: T['trace']
+  servers?: ServerCollection<T['servers']>
+  parameters?: ParameterCollection<T['parameters']>
+  get?: Operation<NonNullable<T['get']>>
+  put?: Operation<NonNullable<T['put']>>
+  post?: Operation<NonNullable<T['post']>>
+  delete?: Operation<NonNullable<T['delete']>>
+  options?: Operation<NonNullable<T['options']>>
+  head?: Operation<NonNullable<T['head']>>
+  patch?: Operation<NonNullable<T['patch']>>
+  trace?: Operation<NonNullable<T['trace']>>
 
   constructor (data?: T) {
     super()
-    Object.assign(this, data)
+
+    if (data == null) {
+      return
+    }
+
+    if (data.summary != null) {
+      this.summary = data.summary
+    }
+
+    if (data.description != null) {
+      this.description = data.description
+    }
+
+    if (data.servers != null) {
+      this.servers = data.servers.map(data => new Server(data)) as ServerCollection<T['servers']>
+    }
+
+    if (data.parameters != null) {
+      this.parameters = data.parameters.map(data => {
+        if (isParameterObject.Check(data)) {
+          return new Parameter(data)
+        }
+        return new Reference(data)
+      }) as ParameterCollection<T['parameters']>
+    }
+
+    if (data.get != null) {
+      this.get = new Operation(data.get)
+    }
+
+    if (data.put != null) {
+      this.put = new Operation(data.put)
+    }
+
+    if (data.post != null) {
+      this.post = new Operation(data.post)
+    }
+
+    if (data.delete != null) {
+      this.delete = new Operation(data.delete)
+    }
+
+    if (data.options != null) {
+      this.options = new Operation(data.options)
+    }
+
+    if (data.head != null) {
+      this.head = new Operation(data.head)
+    }
+
+    if (data.patch != null) {
+      this.patch = new Operation(data.patch)
+    }
+
+    if (data.trace != null) {
+      this.trace = new Operation(data.trace)
+    }
+
   }
 
   static from<T extends PathItemObjectType = PathItemObjectType> (data: unknown): PathItem<T> {
@@ -31,6 +96,12 @@ export class PathItem<T extends PathItemObjectType> extends Base implements Path
 
   static validator = isPathItemObject
 
+  /**
+   * An optional, string summary, intended to apply to all operations in this path.
+   *
+   * @param {string} summary An optional, string summary, intended to apply to all operations in this path.
+   * @returns Returns a new PathItem instance with the given summary text.
+   */
   $summary (summary: string): PathItem<T> {
     return new PathItem({ ...this.json(), summary })
   }
@@ -39,34 +110,37 @@ export class PathItem<T extends PathItemObjectType> extends Base implements Path
     return new PathItem({ ...this.json(), description })
   }
 
-  $server<U extends ServerObjectType> (data: U): PathItem<T & { servers: Push<T['servers'], Server<U>> }> {
-    const servers = [...this.servers ?? [], new Server(data)]
-    return new PathItem({ ...this.json(), servers })
+  $server<U extends ServerObjectType> (data: U): PathItem<T & { servers: [...NonNullable<T['servers']>, U] }> {
+    const json = this.json()
+    const servers = [...(json.servers ?? []) ?? [], data]  as [...NonNullable<T['servers']>, U]
+    return new PathItem({ ...json, servers })
   }
 
-  $parameter<U extends ParameterObjectType = ParameterObjectType> (data: U): PathItem<T & { parameters: Push<T['parameters'], Parameter<U>> }> {
-    const parameters = [...this.parameters ?? [], new Parameter(data)]
-    return new PathItem({ ...this.json(), parameters })
+  $parameter<U extends ParameterObjectType = ParameterObjectType> (data: U): PathItem<T & { parameters: [...NonNullable<T['parameters']>, U] }> {
+    const json = this.json()
+    const parameters = [...(json.parameters ?? []) ?? [], data] as [...NonNullable<T['parameters']>, U]
+    return new PathItem({ ...json, parameters })
   }
 
-  $query<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: Push<T['parameters'], Parameter<U & { in: 'query' }>> }> {
+  $query<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: [...NonNullable<T['parameters']>, U & { in: 'query' }] }> {
     return this.$parameter({ ...data, in: 'query' })
   }
 
-  $header<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: Push<T['parameters'], Parameter<U & { in: 'header' }>> }> {
+  $header<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: [...NonNullable<T['parameters']>, U & { in: 'header' }] }> {
     return this.$parameter({ ...data, in: 'header' })
   }
 
-  $path<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: Push<T['parameters'], Parameter<U & { in: 'path' }>> }> {
+  $path<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: [...NonNullable<T['parameters']>, U & { in: 'path' }] }> {
     return this.$parameter({ ...data, in: 'path' })
   }
 
-  $cookie<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: Push<T['parameters'], Parameter<U & { in: 'cookie' }>> }> {
+  $cookie<U extends Omit<ParameterObjectType, 'in'> = Omit<ParameterObjectType, 'in'>> (data: U): PathItem<T & { parameters: [...NonNullable<T['parameters']>, U & { in: 'cookie' }] }> {
     return this.$parameter({ ...data, in: 'cookie' })
   }
 
   $operation<U extends MethodObjectType = MethodObjectType, V extends OperationObjectType = OperationObjectType> (method: U, data?: V): PathItem<T & { [P in U]: V }> {
-    return new PathItem({ ...this.json(), [method]: new Operation(data) })
+    const pathItem = { ...this.json(), [method]: data } as T & { [P in U]: V }
+    return new PathItem(pathItem)
   }
 
   $get<U extends OperationObjectType = OperationObjectType> (data?: U): PathItem<T & { get: U }> {

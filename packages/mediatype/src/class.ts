@@ -1,26 +1,48 @@
-import { Base, isTSchema, Merge, TypeCheckError } from '@byu-oit/openapi.common'
-import { Example } from '@byu-oit/openapi.example'
-import { Encoding, EncodingObjectType } from '@byu-oit/openapi.encoding'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
+import { Encoding, EncodingObjectType, EncodingRecord } from '@byu-oit/openapi.encoding'
+import { Example, ExampleObjectType, ExampleRecord } from '@byu-oit/openapi.example'
 import { TSchema } from '@sinclair/typebox'
 import { isMediaTypeObject, MediaTypeObjectType } from './schema'
 
-export class MediaType<T extends MediaTypeObjectType> extends Base implements MediaTypeObjectType {
+export class MediaType<T extends MediaTypeObjectType> extends BaseObject<T> {
   schema?: T['schema']
-  example?: any
-  examples?: Record<string, Example>
-  encoding?: T['encoding']
+  example?: T['example']
+  examples?: ExampleRecord<T['examples']>
+  encoding?: EncodingRecord<T['encoding']>
 
-  constructor (data?: T)
-  constructor (schema: T['schema'], data?: T)
-  constructor (schema?: T['schema'] | T, data?: T) {
+  constructor (data?: T) {
     super()
-    const mediaType = schema == null && !isTSchema(schema) ? { ...data, schema } : schema
-    Object.assign(this, mediaType)
+
+    if (data == null) {
+      return
+    }
+
+    if (data.schema != null) {
+      this.schema = data.schema
+    }
+
+    if (data.example != null) {
+      this.example = data.example
+    }
+
+    if (data.examples != null) {
+      this.examples = Object.entries(data.examples).reduce((agg, [basename, data]) => {
+        const example = new Example(data)
+        return { ...agg, [basename]: example }
+      }, {} as ExampleRecord<T['examples']>)
+    }
+
+    if (data.encoding != null) {
+      this.encoding = Object.entries(data.encoding).reduce((agg, [basename, data]) => {
+        const encoding = new Encoding(data)
+        return { ...agg, [basename]: encoding }
+      }, {} as EncodingRecord<T['encoding']>)
+    }
   }
 
-  static from<T extends MediaTypeObjectType>(data: unknown): MediaType<T> {
+  static from<T extends MediaTypeObjectType> (data: unknown): MediaType<T> {
     const valid = MediaType.validator.Check(data)
-    if(!valid) throw new TypeCheckError(MediaType.validator, data)
+    if (!valid) throw new TypeCheckError(MediaType.validator, data)
     return new MediaType(data) as MediaType<T>
   }
 
@@ -30,16 +52,15 @@ export class MediaType<T extends MediaTypeObjectType> extends Base implements Me
     return new MediaType({ ...this.json(), schema })
   }
 
-  $example (name: string, ...args: ConstructorParameters<typeof Example>): MediaType<T> {
-    const examples = { ...this.examples, [name]: new Example(...args) }
-    return new MediaType({ ...this.json(), examples })
+  $example<U extends string, V extends ExampleObjectType>(name: U, data?: V): MediaType<T & { examples: T['examples'] & { [P in U]: V } }> {
+    const json = this.json()
+    const examples = { ...(json.examples ?? []), [name]: data } as T['examples'] & { [P in U]: V }
+    return new MediaType({ ...json, examples })
   }
 
-  $encoding<
-    U extends string,
-    V extends EncodingObjectType
-  > (name: U, data: V): MediaType<T & { encoding: Merge<T['encoding'], { [P in U]: Encoding<V> }> }> {
-    const encoding = { ...this.encoding, [name]: new Encoding(data) }
-    return new MediaType({ ...this.json(), encoding })
+  $encoding<U extends string, V extends EncodingObjectType> (name: U, data: V): MediaType<T & { encoding: T['encoding'] & { [P in U]: V } }> {
+    const json = this.json()
+    const encoding = { ...(json.encoding ?? []), [name]: data } as T['encoding'] & { [P in U]: V }
+    return new MediaType({ ...json, encoding })
   }
 }

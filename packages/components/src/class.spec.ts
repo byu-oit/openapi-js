@@ -1,3 +1,8 @@
+/* eslint-disable
+ @typescript-eslint/no-unsafe-assignment,
+ @typescript-eslint/no-unsafe-call,
+ @typescript-eslint/no-unsafe-member-access
+*/
 import { ComponentsObjectSchema } from './schema'
 import { SchemaObjectSchema } from '@byu-oit/openapi.schema'
 import { ResponseObjectSchema } from '@byu-oit/openapi.response'

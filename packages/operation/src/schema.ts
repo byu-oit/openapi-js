@@ -1,1 +1,1 @@
-export { OperationObjectSchema, OperationObjectType, isOperationObject } from '@byu-oit/openapi.pathitem'
+export { isOperationObject, OperationObjectExamples, OperationObjectReferences, OperationObjectSchema, OperationObjectType } from '@byu-oit/openapi.pathitem'

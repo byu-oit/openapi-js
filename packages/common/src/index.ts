@@ -1,2 +1,2 @@
 export * from './util'
-export * from './Base'
+export * from './BaseObject'

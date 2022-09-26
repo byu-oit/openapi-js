@@ -1,3 +1,8 @@
+/* eslint-disable
+ @typescript-eslint/no-unsafe-assignment,
+ @typescript-eslint/no-unsafe-call,
+ @typescript-eslint/no-unsafe-member-access
+*/
 import { Value } from '@sinclair/typebox/value'
 import { Type } from '@sinclair/typebox'
 import { ExampleObjectSchema } from './schema'
@@ -9,7 +14,7 @@ describe('Example Class', () => {
   const methods: Array<[string, unknown[], string?]> = [
     [Example.prototype.$summary.name, [Value.Create(Type.String())]],
     [Example.prototype.$description.name, [Value.Create(Type.String())]],
-    [Example.prototype.$value.name, [Value.Create(Type.Any())]],
+    [Example.prototype.$value.name, [Value.Create(Type.Unknown())]],
     [Example.prototype.$externalValue.name, [Value.Create(Type.String())]]
   ]
   test.concurrent.each(methods)('%s does not mutate or mal-format the instance', (method, args, prop) => {

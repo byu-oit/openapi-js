@@ -1,25 +1,52 @@
 import { Server, ServerObjectType } from '@byu-oit/openapi.server'
-import { Base } from '@byu-oit/openapi.common'
-import { Merge, TypeCheckError } from '@byu-oit/openapi.common'
+import { BaseObject } from '@byu-oit/openapi.common'
+import { TypeCheckError } from '@byu-oit/openapi.common'
 import { isLinkObject, LinkObjectType } from './schema'
 
-export class Link<T extends LinkObjectType> extends Base implements LinkObjectType {
+export class Link<T extends LinkObjectType> extends BaseObject<T> {
   operationRef?: T['operationRef']
   operationId?: T['operationId']
   parameters?: T['parameters']
   requestBody?: T['requestBody']
-  description?: string
-  server?: T['server']
+  description?: T['description']
+  server?: Server<NonNullable<T['server']>>
 
   constructor (data?: LinkObjectType) {
     super()
-    Object.assign(this, data)
+
+    if (data == null) {
+      return
+    }
+
+    if (data.operationRef != null) {
+      this.operationRef = data.operationRef
+    }
+
+    if (data.operationId != null) {
+      this.operationId = data.operationId
+    }
+
+    if (data.parameters != null) {
+      this.parameters = data.parameters
+    }
+
+    if (data.requestBody != null) {
+      this.requestBody = data.requestBody
+    }
+
+    if (data.description != null) {
+      this.description = data.description
+    }
+
+    if (data.server != null) {
+      this.server = new Server(data.server)
+    }
   }
 
   static from<T extends LinkObjectType = LinkObjectType> (data: unknown): Link<T> {
     const valid = Link.validator.Check(data)
     if (!valid) throw new TypeCheckError(Link.validator, data)
-    return new Link(data) 
+    return new Link(data)
   }
 
   static validator = isLinkObject
@@ -32,16 +59,17 @@ export class Link<T extends LinkObjectType> extends Base implements LinkObjectTy
     return new Link({ ...this.json(), operationId })
   }
 
-  $parameter<U extends string, V> (name: U, expression: V): Link<T & { parameters: Merge<T['parameters'], { [P in U]: V }> }> {
-    const parameters = { ...this.parameters, [name]: expression }
-    return new Link({ ...this.json(), parameters })
+  $parameter<U extends string, V> (name: U, expression: V): Link<T & { parameters: T['parameters'] & { [P in U]: V } }> {
+    const json = this.json()
+    const parameters = { ...(json.parameters ?? []), [name]: expression } as T['parameters'] & { [P in U]: V }
+    return new Link({ ...json, parameters })
   }
 
   $body<U> (requestBody: U): Link<T & { requestBody: U }> {
     return new Link({ ...this.json(), requestBody })
   }
 
-  $description (description: string): Link<T> {
+  $description<U extends string>(description: U): Link<T & { description: U }> {
     return new Link({ ...this.json(), description })
   }
 

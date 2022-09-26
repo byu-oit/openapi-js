@@ -1,3 +1,8 @@
+/* eslint-disable
+ @typescript-eslint/no-unsafe-assignment,
+ @typescript-eslint/no-unsafe-call,
+ @typescript-eslint/no-unsafe-member-access
+*/
 import { Value } from '@sinclair/typebox/value'
 import { Type } from '@sinclair/typebox'
 import { ServerVariableObjectSchema } from './schema'

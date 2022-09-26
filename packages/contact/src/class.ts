@@ -1,20 +1,35 @@
-import { Base, TypeCheckError } from '@byu-oit/openapi.common'
+import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
 import { ContactObjectType, isContactObject } from './schema'
 
-export class Contact<T extends ContactObjectType> extends Base implements ContactObjectType {
+export class Contact<T extends ContactObjectType> extends BaseObject<T> {
   name?: T['name']
   url?: T['url']
   email?: T['email']
 
   constructor (data?: T) {
     super()
-    Object.assign(this, data)
+
+    if (data == null) {
+      return
+    }
+
+    if (data.name != null) {
+      this.name = data.name
+    }
+
+    if (data.url != null) {
+      this.url = data.url
+    }
+
+    if (data.email != null) {
+      this.email = data.email
+    }
   }
 
   static from<T extends ContactObjectType = ContactObjectType> (data: T): Contact<T> {
     const valid = Contact.validator.Check(data)
     if (!valid) throw new TypeCheckError(Contact.validator, data)
-    return new Contact(data) 
+    return new Contact(data)
   }
 
   static validator = isContactObject

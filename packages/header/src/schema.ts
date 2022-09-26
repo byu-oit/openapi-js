@@ -1,12 +1,31 @@
 import { Type, Static, TSchema } from '@sinclair/typebox'
-import { SchemaObjectReferences, SchemaObjectSchema } from '@byu-oit/openapi.schema'
 import {
+  SchemaObjectExamples,
+  SchemaObjectReferences,
+  SchemaObjectSchema
+} from '@byu-oit/openapi.schema'
+import {
+  ReferenceObjectExamples,
   ReferenceObjectReferences,
   ReferenceObjectSchema
 } from '@byu-oit/openapi.reference'
-import { ExampleObjectReferences, ExampleObjectSchema } from '@byu-oit/openapi.example'
+import {
+  ExampleObjectExamples,
+  ExampleObjectReferences,
+  ExampleObjectSchema
+} from '@byu-oit/openapi.example'
 import { ParameterStyleSchema } from '@byu-oit/openapi.parameter'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
+
+export const HeaderObjectExamples: [unknown, ...unknown[]] = [
+  {},
+  {
+    description: 'The number of allowed requests in the current period',
+    schema: {
+      type: 'integer'
+    }
+  }
+]
 
 export const HeaderObjectSchema = Type.Object({
   description: Type.Optional(Type.String()),
@@ -16,23 +35,15 @@ export const HeaderObjectSchema = Type.Object({
   style: Type.Optional(Type.Ref(ParameterStyleSchema)),
   explode: Type.Optional(Type.Boolean()),
   allowReserved: Type.Optional(Type.Boolean()),
-  schema: Type.Optional(Type.Ref(SchemaObjectSchema, { default: SchemaObjectSchema.examples[0] })),
-  example: Type.Optional(Type.Any()),
+  schema: Type.Optional(Type.Ref(SchemaObjectSchema, { default: SchemaObjectExamples[0] })),
+  example: Type.Optional(Type.Unknown()),
   examples: Type.Optional(Type.Record(Type.String(), Type.Union([
-    Type.Ref(ReferenceObjectSchema, { default: ReferenceObjectSchema.examples[0] }),
-    Type.Ref(ExampleObjectSchema, { default: ExampleObjectSchema.examples[0] })
+    Type.Ref(ReferenceObjectSchema, { default: ReferenceObjectExamples[0] }),
+    Type.Ref(ExampleObjectSchema, { default: ExampleObjectExamples[0] })
   ])))
 }, {
   $id: 'Header',
-  examples: [
-    {},
-    {
-      description: 'The number of allowed requests in the current period',
-      schema: {
-        type: 'integer'
-      }
-    }
-  ]
+  examples: HeaderObjectExamples
 })
 
 export type HeaderObjectType = Static<typeof HeaderObjectSchema>
