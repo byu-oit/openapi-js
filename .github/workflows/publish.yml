@@ -63,12 +63,12 @@ jobs:
           scope: '@byu-oit'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets[matrix.registry.token] }}
 
-      - name: Test & build distribution packages
-        run: lerna run test
+      - name: Build distribution packages
+        run: lerna run build
 
       - name: Publish
         run: lerna publish from-package
