@@ -63,14 +63,15 @@ jobs:
           scope: '@byu-oit'
 
       - name: Install Dependencies
-        run: |
-          npm install
-          lerna bootstrap --hoist
+        run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets[matrix.registry.token] }}
 
       - name: Build distribution packages
         run: lerna run build
+
+      - name: Test
+        run: lerna run test
 
       - name: Publish
         run: lerna publish
