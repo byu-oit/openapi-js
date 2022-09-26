@@ -71,6 +71,6 @@ jobs:
         run: lerna run build
 
       - name: Publish
-        run: lerna publish from-package
+        run: lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets[matrix.registry.token] }}
