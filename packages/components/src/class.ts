@@ -39,16 +39,62 @@ import {
 } from './schema'
 import { isReferenceObject, Reference } from '@byu-oit/openapi.reference'
 
+/**
+ * Holds a set of reusable objects for different aspects of the OAS. All objects
+ * defined within the components object will have no effect on the API unless they are
+ * explicitly referenced from properties outside the components object.
+ */
 export class Components<T extends ComponentsObjectType> extends BaseObject<T> {
+  /**
+   * An object to hold reusable (Schema Objects)[https://spec.openapis.org/oas/latest.html#schemaObject].
+   *
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   schemas?: T['schemas']
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   responses?: ResponseRecord<T['responses']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   parameters?: ParameterRecord<T['parameters']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   requestBodies?: RequestBodyRecord<T['requestBodies']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   headers?: HeaderRecord<T['headers']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   securitySchemes?: SecuritySchemeRecord<T['securitySchemes']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   links?: LinkRecord<T['links']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   callbacks?: CallbackRecord<T['callbacks']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   pathItems?: PathItemRecord<T['pathItems']>
+
+  /**
+   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   */
   examples?: ExampleRecord<T['examples']>
 
   constructor (data?: T) {

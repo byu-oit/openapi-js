@@ -34,6 +34,13 @@ export class Contact<T extends ContactObjectType> extends BaseObject<T> {
 
   static validator = isContactObject
 
+  /**
+   * Creates a copy of the instance with the name property added.
+   *
+   * @template T, U
+   * @param {U} name The name to add to the contact object.
+   * @returns {Contact<T & { name: U }}
+   */
   $name<U extends string> (name: U): Contact<T & { name: U }> {
     return new Contact({ ...this.json(), name })
   }
