@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.document",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "OpenAPI document object class and schema definitions",
   "type": "module",
   "exports": {
@@ -28,15 +28,15 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byu-oit/openapi.common": "^0.0.1",
-    "@byu-oit/openapi.components": "^0.0.1",
-    "@byu-oit/openapi.externaldocumentation": "^0.0.1",
-    "@byu-oit/openapi.info": "^0.0.1",
-    "@byu-oit/openapi.pathitem": "^0.0.1",
-    "@byu-oit/openapi.reference": "^0.0.1",
-    "@byu-oit/openapi.securityrequirement": "^0.0.1",
-    "@byu-oit/openapi.server": "^0.0.1",
-    "@byu-oit/openapi.tag": "^0.0.1",
+    "@byu-oit/openapi.common": "^0.0.2",
+    "@byu-oit/openapi.components": "^0.0.2",
+    "@byu-oit/openapi.externaldocumentation": "^0.0.2",
+    "@byu-oit/openapi.info": "^0.0.2",
+    "@byu-oit/openapi.pathitem": "^0.0.2",
+    "@byu-oit/openapi.reference": "^0.0.2",
+    "@byu-oit/openapi.securityrequirement": "^0.0.2",
+    "@byu-oit/openapi.server": "^0.0.2",
+    "@byu-oit/openapi.tag": "^0.0.2",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },

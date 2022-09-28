@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.response",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "OpenAPI response object class and schema definitions",
   "type": "module",
   "exports": {
@@ -28,11 +28,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byu-oit/openapi.common": "^0.0.1",
-    "@byu-oit/openapi.header": "^0.0.1",
-    "@byu-oit/openapi.link": "^0.0.1",
-    "@byu-oit/openapi.mediatype": "^0.0.1",
-    "@byu-oit/openapi.reference": "^0.0.1",
+    "@byu-oit/openapi.common": "^0.0.2",
+    "@byu-oit/openapi.header": "^0.0.2",
+    "@byu-oit/openapi.link": "^0.0.2",
+    "@byu-oit/openapi.mediatype": "^0.0.2",
+    "@byu-oit/openapi.reference": "^0.0.2",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },
