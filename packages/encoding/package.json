@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.encoding",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "OpenAPI encoding object class and schema definitions",
   "type": "module",
   "exports": {
@@ -28,9 +28,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byu-oit/openapi.common": "^0.0.2",
-    "@byu-oit/openapi.header": "^0.0.2",
-    "@byu-oit/openapi.reference": "^0.0.2",
+    "@byu-oit/openapi.common": "^0.0.3",
+    "@byu-oit/openapi.header": "^0.0.3",
+    "@byu-oit/openapi.reference": "^0.0.3",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },
