@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.example",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "OpenAPI example object class and schema definitions",
   "type": "module",
   "exports": {
@@ -28,8 +28,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byu-oit/openapi.common": "*",
-    "@byu-oit/openapi.reference": "*",
+    "@byu-oit/openapi.common": "^0.0.1",
+    "@byu-oit/openapi.reference": "^0.0.1",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },

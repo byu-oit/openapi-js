@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.pathitem",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "OpenAPI path item object class and schema definitions",
   "type": "module",
   "exports": {
@@ -28,14 +28,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byu-oit/openapi.common": "*",
-    "@byu-oit/openapi.server": "*",
-    "@byu-oit/openapi.parameter": "*",
-    "@byu-oit/openapi.externaldocumentation": "*",
-    "@byu-oit/openapi.reference": "*",
-    "@byu-oit/openapi.response": "*",
-    "@byu-oit/openapi.securityrequirement": "*",
-    "@byu-oit/openapi.requestbody": "*",
+    "@byu-oit/openapi.common": "^0.0.1",
+    "@byu-oit/openapi.externaldocumentation": "^0.0.1",
+    "@byu-oit/openapi.parameter": "^0.0.1",
+    "@byu-oit/openapi.reference": "^0.0.1",
+    "@byu-oit/openapi.requestbody": "^0.0.1",
+    "@byu-oit/openapi.response": "^0.0.1",
+    "@byu-oit/openapi.securityrequirement": "^0.0.1",
+    "@byu-oit/openapi.server": "^0.0.1",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },

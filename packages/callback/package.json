@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.callback",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "OpenAPI callback object class and schema definitions",
   "type": "module",
   "exports": {
@@ -28,7 +28,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@byu-oit/openapi.pathitem": "*",
+    "@byu-oit/openapi.pathitem": "^0.0.1",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },
