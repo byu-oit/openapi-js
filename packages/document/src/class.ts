@@ -14,10 +14,9 @@ import {
   Components,
   ComponentsObjectType
 } from '@byu-oit/openapi.components'
+import { Reference, isReferenceObject } from '@byu-oit/openapi.reference'
 import { DocumentObjectType, isDocumentObject } from './schema'
-import { Reference } from '@byu-oit/openapi.reference/src/class'
-import { isReferenceObject } from '@byu-oit/openapi.reference'
-import { TagCollection } from '@byu-oit/openapi.tag/src/types'
+import { TagCollection } from '@byu-oit/openapi.tag'
 
 export class Document<T extends DocumentObjectType = DocumentObjectType> extends BaseObject<T> {
   /**
