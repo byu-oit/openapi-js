@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.common",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Utilities and common libraries for BYU OpenAPI Tools",
   "type": "module",
   "exports": {

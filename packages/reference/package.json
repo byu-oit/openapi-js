@@ -1,6 +1,6 @@
 {
   "name": "@byu-oit/openapi.reference",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "OpenAPI reference object class and schema definitions",
   "type": "module",
   "exports": {
@@ -28,7 +28,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@byu-oit/openapi.common": "^0.0.3",
+    "@byu-oit/openapi.common": "^0.0.4",
     "@sinclair/typebox": "^0.24.41",
     "lodash.get": "^4.4.2",
     "tslib": "^2.4.0"
