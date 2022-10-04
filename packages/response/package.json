@@ -1,32 +1,38 @@
 {
   "name": "@byu-oit/openapi.response",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "description": "OpenAPI response object class and schema definitions",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js"
+    }
+  },
   "main": "cjs/index.js",
-  "module": "es/index.js",
+  "module": "esm/index.js",
   "types": "types/index.d.ts",
   "files": [
     "cjs",
-    "es",
+    "esm",
     "types"
   ],
   "scripts": {
-    "build": "concurrently 'npm run build:cjs' 'npm run build:es' 'npm run build:types'",
+    "build": "concurrently 'npm run build:cjs' 'npm run build:esm' 'npm run build:types'",
     "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:es": "tsc -p tsconfig.es.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "build:types": "tsc -p tsconfig.types.json",
-    "clean": "rimraf ./cjs ./es ./types *.tsbuildinfo coverage",
+    "clean": "rimraf ./cjs ./esm ./types *.tsbuildinfo coverage",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "test": "jest"
   },
   "dependencies": {
-    "@byu-oit/openapi.common": "*",
-    "@byu-oit/openapi.reference": "*",
-    "@byu-oit/openapi.header": "*",
-    "@byu-oit/openapi.mediatype": "*",
-    "@byu-oit/openapi.link": "*",
+    "@byu-oit/openapi.common": "^0.0.4",
+    "@byu-oit/openapi.header": "^0.0.4",
+    "@byu-oit/openapi.link": "^0.0.4",
+    "@byu-oit/openapi.mediatype": "^0.0.4",
+    "@byu-oit/openapi.reference": "^0.0.4",
     "@sinclair/typebox": "^0.24.41",
     "tslib": "^2.4.0"
   },
