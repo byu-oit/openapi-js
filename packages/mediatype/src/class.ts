@@ -4,10 +4,42 @@ import { Example, ExampleObjectType, ExampleRecord } from '@byu-oit/openapi.exam
 import { TSchema } from '@sinclair/typebox'
 import { isMediaTypeObject, MediaTypeObjectType } from './schema'
 
+/**
+ * Each Media Type Object provides schema and examples for the media type identified by its key.
+ * 
+ * {@link https://spec.openapis.org/oas/latest#media-type-object}
+ */
 export class MediaType<T extends MediaTypeObjectType> extends BaseObject<T> {
+
+  /**
+   * The schema defining the content of the request, response, or parameter.
+   * 
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-11}
+   */
   schema?: T['schema']
+
+  /**
+   * Example of the media type. The example object SHOULD be in the correct format as specified by the media type. The example field is mutually exclusive of the examples field. 
+   * Furthermore, if referencing a schema which contains an example, the example value SHALL override the example provided by the schema.
+   * 
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-11}
+   */
   example?: T['example']
+
+  /**
+   * Examples of the media type. Each example object SHOULD match the media type and specified schema if present. The examples field is mutually exclusive of the example field. 
+   * Furthermore, if referencing a schema which contains an example, the examples value SHALL override the example provided by the schema.
+   * 
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-11}
+   */
   examples?: ExampleRecord<T['examples']>
+
+  /**
+   * A map between a property name and its encoding information. The key, being the property name, MUST exist in the schema as a property. 
+   * The encoding object SHALL only apply to requestBody objects when the media type is multipart or application/x-www-form-urlencoded.
+   * 
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-11}
+   */
   encoding?: EncodingRecord<T['encoding']>
 
   constructor (data?: T) {
@@ -48,16 +80,39 @@ export class MediaType<T extends MediaTypeObjectType> extends BaseObject<T> {
 
   static validator = isMediaTypeObject
 
+  /**
+   * Creates a copy of the instance with the schema added.
+   * 
+   * @template T,U
+   * @param {U} schema The schema to be added to the MediaType object.
+   * @returns {MediaType<T & { schema: U }>}
+   */
   $schema<U extends TSchema = TSchema> (schema: U): MediaType<T & { schema: U }> {
     return new MediaType({ ...this.json(), schema })
   }
 
+  /**
+   * Creates a copy of the instance with the example added.
+   * 
+   * @template T, U, V, P
+   * @param {U} name The name to be added to the MediaType object.
+   * @param {V} data The data to be added to the MediaType object
+   * @returns {MediaType<T & { examples: T['examples'] & { [P in U]: V } }>}
+   */
   $example<U extends string, V extends ExampleObjectType>(name: U, data?: V): MediaType<T & { examples: T['examples'] & { [P in U]: V } }> {
     const json = this.json()
     const examples = { ...(json.examples ?? []), [name]: data } as T['examples'] & { [P in U]: V }
     return new MediaType({ ...json, examples })
   }
 
+  /**
+   * Creates a copy of the instance with the encoding added.
+   * 
+   * @template T, U, V, P
+   * @param {U} name The name to be added to the MediaType object.
+   * @param {V} data The data to be added to the MediaType object.
+   * @returns {MediaType<T & { encoding: T['encoding'] & { [P in U]: V } }>}
+   */
   $encoding<U extends string, V extends EncodingObjectType> (name: U, data: V): MediaType<T & { encoding: T['encoding'] & { [P in U]: V } }> {
     const json = this.json()
     const encoding = { ...(json.encoding ?? []), [name]: data } as T['encoding'] & { [P in U]: V }

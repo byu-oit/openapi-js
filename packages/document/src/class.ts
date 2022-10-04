@@ -18,13 +18,17 @@ import { Reference, isReferenceObject } from '@byu-oit/openapi.reference'
 import { DocumentObjectType, isDocumentObject } from './schema'
 import { TagCollection } from '@byu-oit/openapi.tag'
 
+/**
+ * This is the root object of the (OpenAPI document)[https://spec.openapis.org/oas/latest.html#oasDocument].
+ */
+
 export class Document<T extends DocumentObjectType = DocumentObjectType> extends BaseObject<T> {
   /**
    * REQUIRED. This string MUST be the version number of the OpenAPI Specification
    * that the OpenAPI document uses. The openapi field SHOULD be used by tooling to
    * interpret the OpenAPI document. This is not related to the API info.version string.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   openapi: T['openapi']
 
@@ -32,7 +36,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * REQUIRED. Provides metadata about the API. The metadata MAY be used by tooling as
    * required.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   info: Info<T['info']>
 
@@ -40,7 +44,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * The default value for the $schema keyword within Schema Objects contained within
    * this OAS document. This MUST be in the form of a URI.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   jsonSchemaDialect?: T['jsonSchemaDialect']
 
@@ -49,14 +53,14 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * server. If the servers property is not provided, or is an empty array, the
    * default value would be a Server Object with a url value of /.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   servers?: ServerCollection<T['servers']>
 
   /**
    * The available paths and operations for the API.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   paths?: PathItemRecord<T['paths']>
 
@@ -69,14 +73,14 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * that may be initiated by the API provider and the expected responses. An example
    * is available.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   webhooks?: PathItemRecord<T['webhooks']>
 
   /**
    * An element to hold various schemas for the document.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   components?: Components<NonNullable<T['components']>>
 
@@ -87,7 +91,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * request. Individual operations can override this definition. To make security
    * optional, an empty security requirement ({}) can be included in the array.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   security?: T['security']
 
@@ -98,14 +102,14 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * declared MAY be organized randomly or based on the tools’ logic. Each tag name in
    * the list MUST be unique.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   tags?: TagCollection<T['tags']>
 
   /**
    * Additional external documentation.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   externalDocs?: ExternalDocumentation<NonNullable<T['externalDocs']>>
 
@@ -183,47 +187,112 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
     return new Document({ ...this.json(), openapi: version })
   }
 
+  /**
+   * Creates a copy of the instance with the info added.
+   * 
+   * @template T, U
+   * @param {U} data The data of the info property.
+   * @returns {Document<T & { info: U }>}
+   */
   $info<U extends InfoObjectType> (data: U): Document<T & { info: U }> {
     return new Document({ ...this.json(), info: data })
   }
 
+  /**
+   * Creates a copy of the instance with the jsonSchemaDialect added.
+   * 
+   * @template T, U
+   * @param {U} jsonSchemaDialect The jsonSchemaDialect in the form of a URI to be added.
+   * @returns {Document<T & { jsonSchemaDialect: U }>}
+   */
   $jsonSchemaDialect<U extends string> (jsonSchemaDialect: U): Document<T & { jsonSchemaDialect: U }> {
     return new Document({ ...this.json(), jsonSchemaDialect })
   }
 
+  /**
+   * Creates a copy of the instance with the servers added.
+   * 
+   * @template T, U
+   * @param {U} data The array of server objects to be added.
+   * @returns {Document<T & { servers: [...NonNullable<T['servers']>, U] }>}
+   */
   $server<U extends ServerObjectType> (data: U): Document<T & { servers: [...NonNullable<T['servers']>, U] }> {
     const servers = [...this.servers ?? [], data] as [...NonNullable<T['servers']>, U]
     return new Document({ ...this.json(), servers })
   }
 
+  /**
+   * Creates a copy of the instance with the paths added.
+   * 
+   * @template T, U, V, P
+   * @param {U} path The path property to be added to the object.
+   * @param {V} data The data to be added to the object.
+   * @returns {Document<T & { paths: T['paths'] & { [P in U]: V } }>}
+   */
   $path<U extends string, V extends PathItemObjectType> (path: U, data?: V): Document<T & { paths: T['paths'] & { [P in U]: V } }> {
     const json = this.json()
     const paths = { ...(json.paths ?? []), [path]: data } as T['paths'] & { [P in U]: V }
     return new Document({ ...json, paths })
   }
-
+  /**
+   * Creates a copy of the instance with the webhook property added
+   * 
+   * @template T, U, V, P 
+   * @param {U} name The name of the property to be added to the object.
+   * @param {V} data The data to be added to the object.
+   * @returns {Document<T & { webhooks: T['webhooks'] & { [P in U]: V } }>}
+   */
   $webhook<U extends string, V extends PathItemObjectType> (name: U, data?: V): Document<T & { webhooks: T['webhooks'] & { [P in U]: V } }> {
     const json = this.json()
     const webhooks = { ...(json.webhooks ?? []), [name]: data } as T['webhooks'] & { [P in U]: V }
     return new Document({ ...json, webhooks })
   }
 
+  /**
+   * Creates a copy of the instance with the components added.
+   * 
+   * @template T, U
+   * @param {U} data The data to be added to the object
+   * @returns  {Document<T & { components: U }>}
+   */
   $components<U extends ComponentsObjectType> (data: U): Document<T & { components: U }> {
     return new Document({ ...this.json(), components: data })
   }
 
+  /**
+   * Creates a copy of the instance with the securityRequirements added.
+   * 
+   * @template T, U, P
+   * @param {U} name The name of the property to be added to the object.
+   * @param {string[]} values The values to be added to the object
+   * @returns {Document<T & { security: [...NonNullable<T['security']>, { [P in U]: string[] }] }>}
+   */
   $securityRequirement<U extends string> (name: U, values: string[]): Document<T & { security: [...NonNullable<T['security']>, { [P in U]: string[] }] }> {
     const json = this.json()
     const security = [...(json.security ?? []), { [name]: values }] as [...NonNullable<T['security']>, { [P in U]: string[] }]
     return new Document({ ...json, security })
   }
 
+  /**
+   * Creates a copy of the instance with the tag added.
+   * 
+   * @template T, U
+   * @param {U} data The data to be added to the object. 
+   * @returns {Document<T & { tags: [...NonNullable<T['tags']>, U] }>}
+   */
   $tag<U extends TagObjectType> (data: U): Document<T & { tags: [...NonNullable<T['tags']>, U] }> {
     const json = this.json()
     const tags = [...(json.tags ?? []) ?? [], data] as [...NonNullable<T['tags']>, U]
     return new Document({ ...json, tags })
   }
 
+  /**
+   * Creates a copy of the instance with the tag added.
+   * 
+   * @template T, U
+   * @param {U} data The data to be added to the object.
+   * @returns {Document<T & { externalDocs: U }>}
+   */
   $externalDocs<U extends ExternalDocumentationObjectType> (data: U): Document<T & { externalDocs: U }> {
     return new Document({ ...this.json(), externalDocs: data })
   }

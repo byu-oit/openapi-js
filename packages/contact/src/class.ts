@@ -1,9 +1,33 @@
 import { BaseObject, TypeCheckError } from '@byu-oit/openapi.common'
 import { ContactObjectType, isContactObject } from './schema'
 
+
+
+/**
+ * Contact information for the exposed API.
+ * 
+ * {@link https://spec.openapis.org/oas/latest.html#contact-object}
+ */
 export class Contact<T extends ContactObjectType> extends BaseObject<T> {
+  /**
+   * The identifying name of the contact person/organization.
+   * 
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-1}
+   */
   name?: T['name']
+
+  /**
+   * The URL pointing to the contact information. This MUST be in the form of a URL.
+   * 
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-1}
+   */
   url?: T['url']
+
+  /**
+   * The email address of the contact person/organization. This MUST be in the form of an email address.   * 
+   * 
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-1}
+   */
   email?: T['email']
 
   constructor (data?: T) {
@@ -35,7 +59,7 @@ export class Contact<T extends ContactObjectType> extends BaseObject<T> {
   static validator = isContactObject
 
   /**
-   * Creates a copy of the instance with the name property added.
+   * Creates a copy of the instance with the name added.
    *
    * @template T, U
    * @param {U} name The name to add to the contact object.
@@ -45,10 +69,24 @@ export class Contact<T extends ContactObjectType> extends BaseObject<T> {
     return new Contact({ ...this.json(), name })
   }
 
+  /**
+   * Creates a copy of the instance with the url added.
+   * 
+   * @template T, U
+   * @param {U} url The url to add to the contact object.
+   * @returns {Contact<T & { url: U }>}
+   */
   $url<U extends string> (url: U): Contact<T & { url: U }> {
     return new Contact({ ...this.json(), url })
   }
 
+  /**
+   * Creates a copy of the instance with email property added.
+   * 
+   * @template T, U
+   * @param {U} email The email to add to the contact object.
+   * @returns {Contact<T & { email: U }>}
+   */
   $email<U extends string> (email: U): Contact<T & { email: U }> {
     return new Contact({ ...this.json(), email })
   }
