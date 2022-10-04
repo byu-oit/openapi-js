@@ -12,7 +12,7 @@ import { isReferenceObject, Reference } from '@byu-oit/openapi.reference'
  * Describes a single operation parameter.
  * A unique parameter is defined by a combination of a (name)[https://spec.openapis.org/oas/latest#parameterName] and (location)[https://spec.openapis.org/oas/latest#parameterIn].
  * 
- * Source: https://spec.openapis.org/oas/latest#parameter-object
+ * {@link https://spec.openapis.org/oas/latest#parameter-object}
  */
 export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
 
@@ -22,70 +22,70 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
    * If in is "header" and the name field is "Accept", "Content-Type" or "Authorization", the parameter definition SHALL be ignored.
    *   or all other cases, the name corresponds to the parameter name used by the in property.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   name: T['name']
   
   /**
    * REQUIRED. The location of the parameter. Possible values are "query", "header", "path" or "cookie".
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   in: T['in']
   
   /**
    * A brief description of the parameter. This could contain examples of use. (CommonMark syntax)[https://spec.commonmark.org/] MAY be used for rich text representation.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   description?: T['description']
   
   /**
    * Determines whether this parameter is mandatory. If the (parameter location)[https://spec.openapis.org/oas/latest#parameterIn] is "path", this property is REQUIRED and its value MUST be true. Otherwise, the property MAY be included and its default value is false.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   required?: T['required']
   
   /**
    * Specifies that a parameter is deprecated and SHOULD be transitioned out of usage. Default value is false.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   deprecated?: T['deprecated']
   
   /**
    * Sets the ability to pass empty-valued parameters. This is valid only for query parameters and allows sending a parameter with an empty value. Default value is false. If style is used, and if behavior is n/a (cannot be serialized), the value of allowEmptyValue SHALL be ignored. Use of this property is NOT RECOMMENDED, as it is likely to be removed in a later revision.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   allowEmptyValue?: T['allowEmptyValue']
   
   /**
    * Describes how the parameter value will be serialized depending on the type of the parameter value. Default values (based on value of in): for query - form; for path - simple; for header - simple; for cookie - form. 
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   style?: T['style']
   
   /**
    * When this is true, parameter values of type array or object generate separate parameters for each value of the array or key-value pair of the map. For other types of parameters this property has no effect. When style is form, the default value is true. For all other styles, the default value is false.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   explode?: T['explode']
   
   /**
    * Determines whether the parameter value SHOULD allow reserved characters, as defined by [RFC3986] :/?#[]@!$&'()*+,;= to be included without percent-encoding. This property only applies to parameters with an in value of query. The default value is false.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   allowReserved?: T['allowReserved']
   
   /**
    * The schema defining the type used for the parameter.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   schema?: T['schema']
   
@@ -94,14 +94,14 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
    * The example field is mutually exclusive of the examples field. Furthermore, if referencing a schema that contains an example, the example value SHALL override the example provided by the schema. 
    * To represent examples of media types that cannot naturally be represented in JSON or YAML, a string value can contain the example with escaping where necessary.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   example?: T['example']
   
   /**
    * Examples of the parameter’s potential value. Each example SHOULD contain a value in the correct format as specified in the parameter encoding. The examples field is mutually exclusive of the example field. Furthermore, if referencing a schema that contains an example, the examples value SHALL override the example provided by the schema.
    * 
-   * Source: https://spec.openapis.org/oas/latest#parameter-locations
+   * {@link https://spec.openapis.org/oas/latest#parameter-locations}
    */
   examples?: ExampleRecord<T['examples']>
 
@@ -209,7 +209,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the name property added.
+   * Creates a copy of the instance with the name added.
    * 
    * @template T, U
    * @param {U} name Name to be added to the object. 
@@ -220,7 +220,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the in property added.
+   * Creates a copy of the instance with the in added.
    * 
    * @template T, L
    * @param {L} location Location to be added to the object.
@@ -231,7 +231,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the description property added.
+   * Creates a copy of the instance with the description added.
    * 
    * @template T
    * @param {string} description Description to be added to the object. 
@@ -242,7 +242,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the required property added.
+   * Creates a copy of the instance with the required added.
    * 
    * @template T, U
    * @param {U} required Required property to be added to the object.
@@ -253,7 +253,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the deprecated property added.
+   * Creates a copy of the instance with the deprecated added.
    * 
    * @template T, U
    * @param {U} deprecated Deprecated property to be added to the object.
@@ -264,7 +264,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the deprecated property added.
+   * Creates a copy of the instance with the deprecated added.
    * 
    * @template T, U
    * @param {U} allowEmptyValue AllowEmptyValue property added to the object.
@@ -286,7 +286,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the explode property added.
+   * Creates a copy of the instance with the explode added.
    * 
    * @template T, U
    * @param {U} explode Explode property to be added to the object.
@@ -297,7 +297,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the allowReserved property added.
+   * Creates a copy of the instance with the allowReserved added.
    * 
    * @template T, U
    * @param {U} allowReserved AllowReserved property to be added to the object.
@@ -308,7 +308,7 @@ export class Parameter<T extends ParameterObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the example property added.
+   * Creates a copy of the instance with the example added.
    *  
    * @template T, U, V, P
    * @param {U} name Name to be added to the object.

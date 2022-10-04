@@ -15,14 +15,14 @@ import {
  *  2. in MUST NOT be specified, it is implicitly in header.
  *  3. All traits that are affected by the location MUST be applicable to a location of header (for example, (style)[https://spec.openapis.org/oas/latest.html#parameterStyle]).
  *
- * Source: https://spec.openapis.org/oas/latest.html#header-object
+ * {@link https://spec.openapis.org/oas/latest.html#header-object}
  */
 export class Header<T extends HeaderObjectType> extends BaseObject<T> {
 
   /**
    * A brief description of the parameter. This could contain examples of use. (CommonMark syntax)[https://spec.commonmark.org/] MAY be used for rich text representation.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   description?: T['description']
   
@@ -30,14 +30,14 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
    * Determines whether this parameter is mandatory. If the (parameter location)[https://spec.openapis.org/oas/latest.html#parameterIn] is "path", this property is REQUIRED and its value MUST be true. 
    * Otherwise, the property MAY be included and its default value is false
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   required?: T['required']
   
   /**
    * 	Specifies that a parameter is deprecated and SHOULD be transitioned out of usage. Default value is false.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   deprecated?: T['deprecated']
   
@@ -46,14 +46,14 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
    * Default value is false. If (style)[https://spec.openapis.org/oas/latest.html#parameterStyle] is used, and if behavior is n/a (cannot be serialized), the value of allowEmptyValue SHALL be ignored. 
    * Use of this property is NOT RECOMMENDED, as it is likely to be removed in a later revision.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   allowEmptyValue?: T['allowEmptyValue']
   
   /**
    * Describes how the parameter value will be serialized depending on the type of the parameter value. Default values (based on value of in): for query - form; for path - simple; for header - simple; for cookie - form.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   style?: T['style']
   
@@ -61,21 +61,21 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
    * When this is true, parameter values of type array or object generate separate parameters for each value of the array or key-value pair of the map. 
    * For other types of parameters this property has no effect. When (style)[https://spec.openapis.org/oas/latest.html#parameterStyle] is form, the default value is true. For all other styles, the default value is false.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   explode?: T['explode']
   
   /**
    * Determines whether the parameter value SHOULD allow reserved characters, as defined by ([RFC3986])[https://spec.openapis.org/oas/latest.html#bib-RFC3986] :/?#[]@!$&'()*+,;= to be included without percent-encoding. This property only applies to parameters with an in value of query. The default value is false.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   allowReserved?: T['allowReserved']
   
   /**
    * The schema defining the type used for the parameter.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   schema?: T['schema']
   
@@ -84,7 +84,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
    * Furthermore, if referencing a schema that contains an example, the example value SHALL override the example provided by the schema. 
    * To represent examples of media types that cannot naturally be represented in JSON or YAML, a string value can contain the example with escaping where necessary.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   example?: T['example']
   
@@ -92,7 +92,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
    * Examples of the parameter’s potential value. Each example SHOULD contain a value in the correct format as specified in the parameter encoding. The examples field is mutually exclusive of the example field. 
    * Furthermore, if referencing a schema that contains an example, the examples value SHALL override the example provided by the schema.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-9
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-9}
    */
   examples?: ExampleRecord<T['examples']>
 
@@ -156,7 +156,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   static validator = isHeaderObject
 
   /**
-   * Creates a copy of the instance with the description property added.
+   * Creates a copy of the instance with the description added.
    * 
    * @template T, U
    * @param {U} description The description property to add to the header object.
@@ -167,7 +167,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the required property added.
+   * Creates a copy of the instance with the required added.
    * 
    * @template T, U
    * @param {U} required The required property to add to the header object.
@@ -178,7 +178,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the depricated property added.
+   * Creates a copy of the instance with the depricated added.
    * 
    * @template T, U
    * @param {U} deprecated The depricated property to add to the header object.
@@ -189,7 +189,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the allowEmptyValue property added.
+   * Creates a copy of the instance with the allowEmptyValue added.
    * 
    * @template T, U
    * @param {U} allowEmptyValue The allowEmptyValue property to be added to the header object.
@@ -200,7 +200,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the style property added.
+   * Creates a copy of the instance with the style added.
    * 
    * @template T, U
    * @param {U} style The style property to add to the header object.
@@ -211,7 +211,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the explode property added.
+   * Creates a copy of the instance with the explode added.
    * 
    * @template T, U
    * @param {U} explode The explode property to add to the header object.
@@ -222,7 +222,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the allowReserved property added.
+   * Creates a copy of the instance with the allowReserved added.
    *  
    * @template T, U
    * @param {U} allowReserved The allowReserved property to add to the header object.
@@ -233,7 +233,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the schema property added.
+   * Creates a copy of the instance with the schema added.
    * 
    * @template T, U
    * @param {U} schema The schema property added to the header object.
@@ -244,7 +244,7 @@ export class Header<T extends HeaderObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the example property added.
+   * Creates a copy of the instance with the example added.
    * 
    * @template T, U, V, P
    * @param {U} name The name to be added to the header object.

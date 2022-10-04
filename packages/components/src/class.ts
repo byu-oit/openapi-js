@@ -48,70 +48,70 @@ export class Components<T extends ComponentsObjectType> extends BaseObject<T> {
   /**
    * An object to hold reusable (Schema Objects)[https://spec.openapis.org/oas/latest.html#schemaObject].
    *
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   schemas?: T['schemas']
 
   /**
    * An object to hold reusable (Response Objects)[https://spec.openapis.org/oas/latest.html#responseObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   responses?: ResponseRecord<T['responses']>
 
   /**
    * An object to hold reusable (Parameter Objects)[https://spec.openapis.org/oas/latest.html#parameterObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   parameters?: ParameterRecord<T['parameters']>
 
   /**
    * An object to hold reusable (Request Body Objects)[https://spec.openapis.org/oas/latest.html#requestBodyObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   requestBodies?: RequestBodyRecord<T['requestBodies']>
 
   /**
    * An object to hold reusable (Header Objects)[https://spec.openapis.org/oas/latest.html#headerObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   headers?: HeaderRecord<T['headers']>
 
   /**
    * An object to hold reusable (Security Scheme Objects)[https://spec.openapis.org/oas/latest.html#securitySchemeObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   securitySchemes?: SecuritySchemeRecord<T['securitySchemes']>
 
   /**
    * An object to hold reusable (Link Objects)[https://spec.openapis.org/oas/latest.html#linkObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   links?: LinkRecord<T['links']>
 
   /**
    * An object to hold reusable (Callback Objects)[https://spec.openapis.org/oas/latest.html#callbackObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   callbacks?: CallbackRecord<T['callbacks']>
 
   /**
    * An object to hold reusable (Path Item Object)[https://spec.openapis.org/oas/latest.html#pathItemObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   pathItems?: PathItemRecord<T['pathItems']>
 
   /**
    * An object to hold reusable (Example Objects)[https://spec.openapis.org/oas/latest.html#exampleObject].
    * 
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-5
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-5}
    */
   examples?: ExampleRecord<T['examples']>
 

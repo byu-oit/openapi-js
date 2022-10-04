@@ -11,7 +11,7 @@ export class Reference<T extends ReferenceObjectType = ReferenceObjectType> exte
   /**
    * REQUIRED. The reference identifier. This MUST be in the form of a URI.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-18
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-18}
    */
   $ref: T['$ref']
 
@@ -20,7 +20,7 @@ export class Reference<T extends ReferenceObjectType = ReferenceObjectType> exte
    * component. If the referenced object-type does not allow a summary field, then
    * this field has no effect.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-18
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-18}
    */
   summary?: T['summary']
 
@@ -29,7 +29,7 @@ export class Reference<T extends ReferenceObjectType = ReferenceObjectType> exte
    * CommonMark syntax MAY be used for rich text representation. If the referenced
    * object-type does not allow a description field, then this field has no effect.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-18
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-18}
    */
   description?: T['description']
 
@@ -56,18 +56,45 @@ export class Reference<T extends ReferenceObjectType = ReferenceObjectType> exte
     }
   }
 
+  /**
+   * Creates a copy of the instance with the $ref property added.
+   *
+   * @template T, U
+   * @param {U} ref
+   * @returns {Reference<T & { $ref: U }>}
+   */
   $reference<U extends string> (ref: U): Reference<T & { $ref: U }> {
     return new Reference({ ...this.json(), $ref: ref }, this.root)
   }
 
+  /**
+   * Creates a copy of the instance with the summary added.
+   *
+   * @template T, U
+   * @param {U} summary
+   * @returns {Reference<T & { summary: U }>}
+   */
   $summary<U extends string> (summary: U): Reference<T & { summary: U }> {
     return new Reference({ ...this.json(), summary }, this.root)
   }
 
+  /**
+   * Creates a copy of the instance with the description added.
+   *
+   * @template T, U
+   * @param {U} description
+   * @returns {Reference<T & { description: U }>}
+   */
   $description<U extends string> (description: U): Reference<T & { description: U }> {
     return new Reference({ ...this.json(), description }, this.root)
   }
 
+  /**
+   * Dereferences this current object relative to the root of the document
+   *
+   * @param {unknown} [root]
+   * @returns {unknown} The object located at the $ref location.
+   */
   $dereference(root?: unknown): unknown {
     root = root ?? this.root
 

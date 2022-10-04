@@ -3,21 +3,21 @@ import { ExampleObjectType, isExampleObject } from './schema'
 
 
 /**
- * Source: https://spec.openapis.org/oas/latest.html#example-object
+ * {@link https://spec.openapis.org/oas/latest.html#example-object}
  */
 export class Example<T extends ExampleObjectType> extends BaseObject<T> {
 
   /**
    * Short description for the example.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-15
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-15}
    */
   summary?: T['summary']
 
   /**
    * Long description for the example. (CommonMark syntax)[https://spec.commonmark.org/] MAY be used for rich text representation.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-15
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-15}
    */
   description?: T['description']
 
@@ -25,7 +25,7 @@ export class Example<T extends ExampleObjectType> extends BaseObject<T> {
    * Embedded literal example. The value field and externalValue field are mutually exclusive. 
    * To represent examples of media types that cannot naturally represented in JSON or YAML, use a string value to contain the example, escaping where necessary.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-15
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-15}
    */
   value?: T['value']
 
@@ -33,7 +33,7 @@ export class Example<T extends ExampleObjectType> extends BaseObject<T> {
    * A URI that points to the literal example. This provides the capability to reference examples that cannot easily be included in JSON or YAML documents. 
    * The value field and externalValue field are mutually exclusive. See the rules for resolving (Relative References)[https://spec.openapis.org/oas/latest.html#relativeReferencesURI].
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-15
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-15}
    */
   externalValue?: T['externalValue']
 
@@ -70,7 +70,7 @@ export class Example<T extends ExampleObjectType> extends BaseObject<T> {
   static validator = isExampleObject
 
   /**
-   * Creates a copy of the instance with the summary property added.
+   * Creates a copy of the instance with the summary added.
    * 
    * @template T, U
    * @param {U} summary The summary to be added to the example object.
@@ -81,7 +81,7 @@ export class Example<T extends ExampleObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the description property added.
+   * Creates a copy of the instance with the description added.
    * 
    * @template T, U
    * @param {U} description The description to be added to the example object.
@@ -92,7 +92,7 @@ export class Example<T extends ExampleObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the value property added.
+   * Creates a copy of the instance with the value added.
    * 
    * @template T, U
    * @param {U} value The value to be added to the example object. 
@@ -103,7 +103,7 @@ export class Example<T extends ExampleObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the externalValue property added.
+   * Creates a copy of the instance with the externalValue added.
    * 
    * @template T, U
    * @param {U} externalValue 

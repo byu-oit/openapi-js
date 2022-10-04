@@ -4,19 +4,19 @@ import { ExternalDocumentationObjectType, isExternalDocumentationObject } from '
 /**
  * Allows referencing an external resource for extended documentation.
  * 
- * Source: https://spec.openapis.org/oas/latest.html#external-documentation-object
+ * {@link https://spec.openapis.org/oas/latest.html#external-documentation-object}
  */
 export class ExternalDocumentation<T extends ExternalDocumentationObjectType> extends BaseObject<T> {
   
   /**
    * A description of the target documentation. (CommonMark syntax)[https://spec.commonmark.org/] MAY be used for rich text representation.
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-8 
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-8} 
   */
   url: T['url']
 
   /**
    * REQUIRED. The URL for the target documentation. This MUST be in the form of a URL.
-   *  Source: https://spec.openapis.org/oas/latest.html#fixed-fields-8 
+   *  {@link https://spec.openapis.org/oas/latest.html#fixed-fields-8} 
   */
   description?: T['description']
 
@@ -39,7 +39,7 @@ export class ExternalDocumentation<T extends ExternalDocumentationObjectType> ex
   static validator = isExternalDocumentationObject
 
   /**
-   * Creates a copy of the instance with the url property added.
+   * Creates a copy of the instance with the url added.
    * 
    * @template T, U
    * @param {U} url  The url to be added to the object.
@@ -50,7 +50,7 @@ export class ExternalDocumentation<T extends ExternalDocumentationObjectType> ex
   }
 
   /**
-   * Creates a copy of the instance with the url property added.
+   * Creates a copy of the instance with the url added.
    * 
    * @template T, U
    * @param {U} description The description to be added to the object.

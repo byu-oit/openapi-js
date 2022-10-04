@@ -11,7 +11,7 @@ import { Reference } from '@byu-oit/openapi.reference'
 /**
  * A single encoding definition applied to a single schema property.
  * 
- * Source: https://spec.openapis.org/oas/latest.html#encoding-object
+ * {@link https://spec.openapis.org/oas/latest.html#encoding-object}
  */
 export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
   /**
@@ -23,7 +23,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
    *  a wildcard media type (e.g. image/*),
    *  or a comma-separated list of the two types.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-12
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-12}
    */
   contentType?: T['contentType']
 
@@ -32,7 +32,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
    * Content-Type is described separately and SHALL be ignored in this section.
    * This property SHALL be ignored if the request body media type is not a multipart.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-12
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-12}
    */
   headers?: HeaderRecord<T['headers']>
 
@@ -43,7 +43,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
    * This property SHALL be ignored if the request body media type is not application/x-www-form-urlencoded or multipart/form-data. 
    * If a value is explicitly defined, then the value of contentType (implicit or explicit) SHALL be ignored.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-12
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-12}
    */
   style?: T['style']
 
@@ -55,7 +55,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
    * This property SHALL be ignored if the request body media type is not application/x-www-form-urlencoded or multipart/form-data. 
    * If a value is explicitly defined, then the value of contentType (implicit or explicit) SHALL be ignored. 
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-12
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-12}
    */
   explode?: T['explode']
 
@@ -65,7 +65,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
    * The default value is false. This property SHALL be ignored if the request body media type is not application/x-www-form-urlencoded or multipart/form-data.
    * If a value is explicitly defined, then the value of contentType (implicit or explicit) SHALL be ignored.
    * 
-   * Source: https://spec.openapis.org/oas/latest.html#fixed-fields-12
+   * {@link https://spec.openapis.org/oas/latest.html#fixed-fields-12}
    */
   allowReserved?: T['allowReserved']
 
@@ -109,7 +109,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
   static validator = isEncodingObject
 
   /**
-   * Creates a copy of the instance with the contentType property added.
+   * Creates a copy of the instance with the contentType added.
    * 
    * @template T, U
    * @param {U} contentType The contentType to add to the Encoding object
@@ -120,7 +120,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the header property added.
+   * Creates a copy of the instance with the header added.
    * 
    * @template T, U, V, P
    * @param {U} name The name to add to the property.
@@ -134,7 +134,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the style property added.
+   * Creates a copy of the instance with the style added.
    * 
    * @template T, U
    * @param {U} style The style to be added to the Encoding object.
@@ -145,7 +145,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the explode property added.
+   * Creates a copy of the instance with the explode added.
    * 
    * @template T, U
    * @param {U} explode The explode variable to add to the Encoding object.
@@ -156,7 +156,7 @@ export class Encoding<T extends EncodingObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the allowReserved property added.
+   * Creates a copy of the instance with the allowReserved added.
    * 
    * @template T, U
    * @param {U} allowReserved The allowReserved variable to be added.

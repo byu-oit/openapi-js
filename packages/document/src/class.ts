@@ -28,7 +28,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * that the OpenAPI document uses. The openapi field SHOULD be used by tooling to
    * interpret the OpenAPI document. This is not related to the API info.version string.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   openapi: T['openapi']
 
@@ -36,7 +36,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * REQUIRED. Provides metadata about the API. The metadata MAY be used by tooling as
    * required.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   info: Info<T['info']>
 
@@ -44,7 +44,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * The default value for the $schema keyword within Schema Objects contained within
    * this OAS document. This MUST be in the form of a URI.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   jsonSchemaDialect?: T['jsonSchemaDialect']
 
@@ -53,14 +53,14 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * server. If the servers property is not provided, or is an empty array, the
    * default value would be a Server Object with a url value of /.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   servers?: ServerCollection<T['servers']>
 
   /**
    * The available paths and operations for the API.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   paths?: PathItemRecord<T['paths']>
 
@@ -73,14 +73,14 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * that may be initiated by the API provider and the expected responses. An example
    * is available.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   webhooks?: PathItemRecord<T['webhooks']>
 
   /**
    * An element to hold various schemas for the document.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   components?: Components<NonNullable<T['components']>>
 
@@ -91,7 +91,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * request. Individual operations can override this definition. To make security
    * optional, an empty security requirement ({}) can be included in the array.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   security?: T['security']
 
@@ -102,14 +102,14 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
    * declared MAY be organized randomly or based on the tools’ logic. Each tag name in
    * the list MUST be unique.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   tags?: TagCollection<T['tags']>
 
   /**
    * Additional external documentation.
    *
-   * Source: https://spec.openapis.org/oas/latest.html#schema
+   * {@link https://spec.openapis.org/oas/latest.html#schema}
    */
   externalDocs?: ExternalDocumentation<NonNullable<T['externalDocs']>>
 
@@ -188,7 +188,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the info property added.
+   * Creates a copy of the instance with the info added.
    * 
    * @template T, U
    * @param {U} data The data of the info property.
@@ -199,7 +199,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the jsonSchemaDialect property added.
+   * Creates a copy of the instance with the jsonSchemaDialect added.
    * 
    * @template T, U
    * @param {U} jsonSchemaDialect The jsonSchemaDialect in the form of a URI to be added.
@@ -210,7 +210,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the servers property added.
+   * Creates a copy of the instance with the servers added.
    * 
    * @template T, U
    * @param {U} data The array of server objects to be added.
@@ -222,7 +222,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the paths property added.
+   * Creates a copy of the instance with the paths added.
    * 
    * @template T, U, V, P
    * @param {U} path The path property to be added to the object.
@@ -249,7 +249,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the components property added.
+   * Creates a copy of the instance with the components added.
    * 
    * @template T, U
    * @param {U} data The data to be added to the object
@@ -260,7 +260,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the securityRequirements property added.
+   * Creates a copy of the instance with the securityRequirements added.
    * 
    * @template T, U, P
    * @param {U} name The name of the property to be added to the object.
@@ -274,7 +274,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the tag property added.
+   * Creates a copy of the instance with the tag added.
    * 
    * @template T, U
    * @param {U} data The data to be added to the object. 
@@ -287,7 +287,7 @@ export class Document<T extends DocumentObjectType = DocumentObjectType> extends
   }
 
   /**
-   * Creates a copy of the instance with the tag property added.
+   * Creates a copy of the instance with the tag added.
    * 
    * @template T, U
    * @param {U} data The data to be added to the object.

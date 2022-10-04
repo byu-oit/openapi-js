@@ -7,56 +7,56 @@ import { InfoObjectType, isInfoObject } from './schema'
 /**
  * The object provides metadata about the API. The metadata MAY be used by the clients if needed, and MAY be presented in editing or documentation generation tools for convenience.
  *
- * Source: https://spec.openapis.org/oas/latest#info-object
+ * {@link https://spec.openapis.org/oas/latest#info-object}
  */
 export class Info<T extends InfoObjectType> extends BaseObject<T> {
 
   /**
    * REQUIRED. The title of the API.
    * 
-   * Source: https://spec.openapis.org/oas/latest#fixed-fields-0
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-0}
    */
   title: T['title']
   
   /**
    * A short summary of the API.
    * 
-   * Source: https://spec.openapis.org/oas/latest#fixed-fields-0
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-0}
    */
   summary?: T['summary']
   
   /**
    * A description of the API. (CommonMark syntax)[https://spec.commonmark.org/] MAY be used for rich text representation.
    * 
-   * Source: https://spec.openapis.org/oas/latest#fixed-fields-0
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-0}
    */
   description?: T['description']
   
   /**
    * A URL to the Terms of Service for the API. This MUST be in the form of a URL.
    * 
-   * Source: https://spec.openapis.org/oas/latest#fixed-fields-0
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-0}
    */
   termsOfService?: T['termsOfService']
   
   /**
    * The contact information for the exposed API.
    * 
-   * Source: https://spec.openapis.org/oas/latest#fixed-fields-0
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-0}
    */
   contact?: Contact<NonNullable<T['contact']>>
   
   /**
    * The license information for the exposed API.
    * 
-   * Source: https://spec.openapis.org/oas/latest#fixed-fields-0
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-0}
    */
   license?: License<NonNullable<T['license']>>
   
   /**
    * REQUIRED. The version of the OpenAPI document (which is distinct from the (OpenAPI Specification version)[https://spec.openapis.org/oas/latest#oasVersion] or the API implementation version).
    * 
-   * Source: https://spec.openapis.org/oas/latest#fixed-fields-0
+   * {@link https://spec.openapis.org/oas/latest#fixed-fields-0}
    */
   version: T['version']
 
@@ -98,7 +98,7 @@ export class Info<T extends InfoObjectType> extends BaseObject<T> {
 
 
   /**
-   * Creates a copy of the instance with the title property added.
+   * Creates a copy of the instance with the title added.
    * 
    * @template T, U
    * @param {U} title The title to be added to the info object. 
@@ -109,7 +109,7 @@ export class Info<T extends InfoObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the summary property added.
+   * Creates a copy of the instance with the summary added.
    * 
    * @template T
    * @param {string} text The text to be added to the info object.
@@ -120,7 +120,7 @@ export class Info<T extends InfoObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the description property added.
+   * Creates a copy of the instance with the description added.
    * 
    * @template T
    * @param {string} text The text to be added to the info object.
@@ -131,7 +131,7 @@ export class Info<T extends InfoObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the description property added.
+   * Creates a copy of the instance with the description added.
    * 
    * @template T
    * @param {string} text The text to be added to the info object. 
@@ -142,7 +142,7 @@ export class Info<T extends InfoObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the contact property added.
+   * Creates a copy of the instance with the contact added.
    * 
    * @template T, U
    * @param {U} data The data to be added to the info object. 
@@ -153,7 +153,7 @@ export class Info<T extends InfoObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the license property added.
+   * Creates a copy of the instance with the license added.
    * 
    * @template T, U
    * @param {U} data The data to be added to the info object.
@@ -164,7 +164,7 @@ export class Info<T extends InfoObjectType> extends BaseObject<T> {
   }
 
   /**
-   * Creates a copy of the instance with the license property added.
+   * Creates a copy of the instance with the license added.
    * 
    * @template T, U
    * @param {U} version The version to be added to the info object.
