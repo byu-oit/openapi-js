@@ -48,15 +48,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/byu-oit/byu-oit-sdk-js.git"
+    "url": "git+https://github.com/byu-oit/openapi-js.git"
   },
   "keywords": [],
   "author": "Spencer Tuft <stuft2@byu.edu>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/byu-oit/byu-oit-sdk-js/issues"
+    "url": "https://github.com/byu-oit/openapi-js/issues"
   },
-  "homepage": "https://github.com/byu-oit/byu-oit-sdk-js#readme",
+  "homepage": "https://github.com/byu-oit/openapi-js#readme",
   "publishConfig": {
     "access": "public"
   },

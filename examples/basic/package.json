@@ -1,0 +1,21 @@
+{
+  "name": "persons-v3-example",
+  "version": "1.0.0",
+  "description": "Persons Resource of the University API",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@byu-oit/openapi.document": "*",
+    "@sinclair/typebox": "^0.24.46"
+  }
+}
