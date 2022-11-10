@@ -68,7 +68,7 @@ export const SecuritySchemeObjectSchema = Type.Object({
   in: Type.Optional(Type.String()),
   scheme: Type.Optional(Type.String()),
   bearerFormat: Type.Optional(Type.String()),
-  flows: Type.Optional(Type.Record(OAuthGrantTypeSchema, Type.Ref(OAuthFlowObjectSchema, { default: OAuthFlowObjectExamples[0] }))),
+  flows: Type.Optional(Type.Record(OAuthGrantTypeSchema, Type.Optional(Type.Ref(OAuthFlowObjectSchema, { default: OAuthFlowObjectExamples[0] })))),
   openIdConnectUrl: Type.Optional(Type.String())
 }, {
   $id: 'SecurityScheme',
